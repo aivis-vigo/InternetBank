@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use function redirect;
 use function request;
@@ -12,21 +15,23 @@ class RegisterController extends Controller
 {
     public function create(): view
     {
-        return view('authorize');
+        return view('register');
     }
 
     public function store(): RedirectResponse
     {
         $attributes = request()->validate([
-            'name' => ['required', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
+            'name' => ['required', 'min:3', 'max:255'],
+            'email' => ['required', 'max:255', Rule::unique('users', 'email')],
             'password' => ['required', 'min:7', 'max:255']
         ]);
 
-        User::create($attributes);
+        $user = User::create($attributes);
 
-        return redirect()->action(
-            [UserController::class, 'index']
-        );
+        Auth::login($user);
+
+        Session::put('name', $attributes['name']);
+
+        return redirect('/')->with('created', 'Successfully created');
     }
 }
