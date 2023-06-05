@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class LoginController extends Controller
@@ -9,5 +10,22 @@ class LoginController extends Controller
     public function login(): View
     {
         return view('login', []);
+    }
+
+
+    public function store()
+    {
+       $attributes = request()->validate([
+           'email' => ['required', 'email'],
+           'password' => ['required']
+       ]);
+
+       if (auth()->attempt($attributes)) {
+           return redirect('/')->with('created', 'Welcome back!');
+       }
+
+       throw ValidationException::withMessages([
+           'password' => 'Invalid credentials!'
+       ]);
     }
 }
