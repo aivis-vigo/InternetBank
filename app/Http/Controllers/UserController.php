@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return json_decode(User::all());
+        return view('home', [
+            'content' => DB::table('users')->get()
+        ]);
     }
 }

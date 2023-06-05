@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use function request;
 
@@ -21,6 +22,10 @@ class RegisterController extends Controller
             'password' => ['required', 'min:7', 'max:255']
         ]);
 
-        User::create();
+        $user = new User();
+        $user->name = $_POST['name'];
+        $user->email = $_POST['email'];
+        $user->password = $_POST['password'];
+        $user->save();
     }
 }
