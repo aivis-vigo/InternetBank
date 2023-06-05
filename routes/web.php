@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,16 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $users = new UserController();
+Route::get('/', [UserController::class, 'index']);
 
-    return view('home', [
-        'content' => $users->index()
-    ]);
-});
-
-Route::get('/register', function () {
-   return view('authorize', []);
-});
-
-Route::resource('articles', UserController::class);
+// Register
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store']);
