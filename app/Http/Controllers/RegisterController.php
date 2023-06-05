@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use function redirect;
 use function request;
 
 class RegisterController extends Controller
@@ -14,18 +15,18 @@ class RegisterController extends Controller
         return view('authorize');
     }
 
-    public function store(): void
+    public function store(): RedirectResponse
     {
-        request()->validate([
+        $attributes = request()->validate([
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
             'password' => ['required', 'min:7', 'max:255']
         ]);
 
-        $user = new User();
-        $user->name = $_POST['name'];
-        $user->email = $_POST['email'];
-        $user->password = $_POST['password'];
-        $user->save();
+        User::create($attributes);
+
+        return redirect()->action(
+            [UserController::class, 'index']
+        );
     }
 }
