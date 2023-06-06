@@ -5,6 +5,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserController::class, 'index']);
 
 // Login
-Route::get('/login', [LoginController::class, 'login'])->middleware('guest');
-Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
+    Route::get('/login', [LoginController::class, 'login'])
+    ->middleware('guest');
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+    ->middleware('guest');
 
 // Register
-Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+Route::get('/register', [RegisterController::class, 'create'])
+    ->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store'])
+    ->middleware('guest');
 
 // Logout
 Route::get('/logout', [LogoutController::class, 'logout']);
+
+// Profile
+Route::get('/profile', [UserController::class, 'show']);
