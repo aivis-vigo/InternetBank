@@ -61,6 +61,7 @@
     @endif
 @endsection
 
+
 @section('footer')
     @parent
 @endsection
