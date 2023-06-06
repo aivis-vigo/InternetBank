@@ -21,7 +21,7 @@ class LoginController extends Controller
        ]);
 
        if (auth()->attempt($attributes)) {
-           return redirect('/')->with('created', 'Welcome back!');
+           return redirect('/')->with('success', 'Welcome back!');
        }
 
        throw ValidationException::withMessages([
