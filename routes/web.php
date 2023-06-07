@@ -22,16 +22,16 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 Route::get('/', [UserController::class, 'index']);
 
 // Login
-Route::get('/login', [LoginController::class, 'login'])
-    ->middleware('guest');
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-    ->middleware('guest');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'login']);
+    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+});
 
 // Register
-Route::get('/register', [RegisterController::class, 'create'])
-    ->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])
-    ->middleware('guest');
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegisterController::class, 'create']);
+    Route::post('/register', [RegisterController::class, 'store']);
+});
 
 // Logout
 Route::get('/logout', [LogoutController::class, 'logout']);

@@ -32,7 +32,7 @@
 
         @if (request()->user()->two_factor_secret)
             <p>You have two-factor authentication enabled</p>
-            <form action="/user/two-factor-authentication" method="POST">
+            <form action="/user/two-factor-authentication" method="post">
                 @csrf
                 @method('DELETE')
                 <button class="p-4 bg-blue-500 rounded-xl">
@@ -41,7 +41,7 @@
             </form>
         @else
             <p>You don't have two-factor authentication enabled</p>
-            <form action="/user/two-factor-authentication" method="POST">
+            <form action="/user/two-factor-authentication" method="post">
                 @csrf
                 <button class="p-4 bg-blue-500 rounded-xl">
                     Enable 2FA
