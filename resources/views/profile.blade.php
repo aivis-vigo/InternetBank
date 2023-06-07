@@ -31,14 +31,21 @@
         @endif
 
         @if (request()->user()->two_factor_secret)
-            <p>You have two-factor authentication enabled</p>
-            <form action="/user/two-factor-authentication" method="post">
-                @csrf
-                @method('DELETE')
-                <button class="p-4 bg-blue-500 rounded-xl">
-                    Disable 2FA
-                </button>
-            </form>
+            <div class="w-1/2 p-4 mx-auto">
+                <div class="flex justify-left items-left p-4 bg-white rounded-lg">
+                    <div>
+                        <p class="text-black">You have two-factor authentication enabled</p>
+                        <form action="/user/two-factor-authentication" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                Disable 2FA
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         @else
             <p>You don't have two-factor authentication enabled</p>
             <form action="/user/two-factor-authentication" method="post">
