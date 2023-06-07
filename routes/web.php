@@ -22,7 +22,7 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 Route::get('/', [UserController::class, 'index']);
 
 // Login
-    Route::get('/login', [LoginController::class, 'login'])
+Route::get('/login', [LoginController::class, 'login'])
     ->middleware('guest');
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
