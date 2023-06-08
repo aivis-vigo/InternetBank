@@ -17,6 +17,13 @@
                     </h1>
                     <form class="space-y-4 md:space-y-6" action="/login" method="post">
                         @csrf
+
+                        @if (session('status'))
+                            <div class="mb-4 font-medium text-sm text-green-600">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                                 email</label>
@@ -64,12 +71,6 @@
             </div>
         </div>
     </section>
-
-    @if (session('status'))
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ session('status') }}
-        </div>
-    @endif
 
     @if (session()->exists('success'))
         <div x-data="{ show: true }"
