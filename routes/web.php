@@ -37,4 +37,4 @@ Route::middleware('guest')->group(function () {
 Route::get('/logout', [LogoutController::class, 'logout']);
 
 // Profile
-Route::get('/profile', [UserController::class, 'show']);
+Route::get('/settings', [UserController::class, 'show']);

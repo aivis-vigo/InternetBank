@@ -21,8 +21,8 @@
         </div>
     </div>
 
-    <div class="grid h-full w-full bg-black">
-        <p class="sm:w-1/2 text-justify p-6 mx-auto text-white">Welcome to CryptoBank, your premier destination for
+    <div class="grid h-full w-full bg-gray-200 text-black">
+        <p class="sm:w-1/2 text-justify p-6 mx-auto">Welcome to CryptoBank, your premier destination for
             secure online banking and cryptocurrency
             management. We
             take pride in providing you with a seamless and reliable banking experience. With our cutting-edge

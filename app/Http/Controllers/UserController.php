@@ -11,6 +11,6 @@ class UserController extends Controller
 
     public function show()
     {
-        return view('profile');
+        return view('settings');
     }
 }
