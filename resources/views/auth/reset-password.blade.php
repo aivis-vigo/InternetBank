@@ -15,12 +15,6 @@
                     <form class="space-y-4 md:space-y-6" action="{{ route('password.update') }}" method="post">
                         @csrf
 
-                        @if (session('status'))
-                            <div class="mb-4 font-medium text-sm text-green-600">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
                         <input type="hidden" name="token" value="{{ request()->token }}">
 
                         <div>
@@ -42,12 +36,6 @@
                             <input type="password" name="password" id="password" placeholder="••••••••"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    required="">
-
-                            @error('password')
-                            <p class="text-red-500 text-xs mt-6">
-                                {{ $message }}
-                            </p>
-                            @enderror
                         </div>
 
                         <div>
@@ -60,7 +48,7 @@
                                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    required="">
 
-                            @error('password_confirmation')
+                            @error('password')
                             <p class="text-red-500 text-xs mt-6">
                                 {{ $message }}
                             </p>
