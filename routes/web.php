@@ -23,7 +23,7 @@ Route::get('/', [UserController::class, 'index']);
 
 // Login
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [LoginController::class, 'login']);
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 });
 

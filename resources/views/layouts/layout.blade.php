@@ -15,7 +15,7 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="/" class="flex items-center">
-                <img src="logo.png" class="h-8 mr-3" alt="Flowbite Logo" />
+                <img src="logo.png" class="h-8 mr-3" alt="I-Bank Logo" />
                 <span class="self-center text-black text-2xl font-semibold whitespace-nowrap dark:text-white">I-Bank</span>
             </a>
             <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -56,7 +56,7 @@
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
                 <a href="/" class="flex items-center mb-4 sm:mb-0">
-                    <img src="logo.png" class="h-8 mr-3" alt="Flowbite Logo" />
+                    <img src="logo.png" class="h-8 mr-3" alt="I-Bank Logo" />
                     <span class="self-center text-black text-2xl font-semibold whitespace-nowrap dark:text-white">I-Bank</span>
                 </a>
                 <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-black sm:mb-0 dark:text-gray-400">
