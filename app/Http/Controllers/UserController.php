@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -44,5 +45,10 @@ class UserController extends Controller
         $user->save();
 
         return \redirect('settings');
+    }
+
+    public function accounts()
+    {
+        $response = Http::get();
     }
 }
