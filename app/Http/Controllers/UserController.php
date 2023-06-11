@@ -18,6 +18,11 @@ class UserController extends Controller
         return view('settings');
     }
 
+    public function dashboard(): View
+    {
+        return view('auth.dashboard');
+    }
+
     public function editUserInfo(): View
     {
         return view('auth.profile-info');

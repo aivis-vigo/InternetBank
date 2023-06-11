@@ -40,3 +40,6 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 Route::get('/settings', [UserController::class, 'show']);
 Route::get('/profile/edit', [UserController::class, 'editUserInfo']);
 Route::post('/profile/update', [UserController::class, 'update']);
+
+// Dashboard
+Route::get('/dashboard', [UserController::class, 'dashboard']);
