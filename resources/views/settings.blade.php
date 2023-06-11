@@ -9,7 +9,7 @@
 @section('content')
     <div class="h-full w-full text-white">
         <div class="w-1/2 p-4 mx-auto">
-            <div class="flex justify-left items-left p-4 bg-white rounded-lg border-2 border-gray-300 text-black">
+            <div class="flex justify-left items-left p-4 pb-0 bg-white rounded-lg border-2 border-gray-300 text-black">
                 <div>
                     <p>Edit profile info</p>
                     <form action="/profile/edit" method="get">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="w-1/2 p-4 mx-auto">
-            <div class="flex justify-left items-left p-4 bg-white rounded-lg border-2 border-gray-300 text-black">
+            <div class="flex justify-left items-left p-4 pb-0 bg-white rounded-lg border-2 border-gray-300 text-black">
                 <div>
                     <p>Verify your email</p>
                     <form action="/email/verification-notification" method="post">
@@ -69,7 +69,8 @@
 
                 @if (request()->user()->two_factor_secret)
                     <div class="w-full mx-auto">
-                        <div class="flex justify-left items-left my-4 bg-white rounded-lg border-2 border-gray-300 text-black">
+                        <div
+                            class="flex justify-left items-left my-4 bg-white rounded-lg border-2 border-gray-300 text-black">
                             <div>
                                 <p>You have two-factor authentication enabled</p>
                                 <form action="/user/two-factor-authentication" method="post">
@@ -85,7 +86,8 @@
                     </div>
                 @else
                     <div class="w-1/2 p-4 mx-auto">
-                        <div class="flex justify-left items-left p-4 bg-white rounded-lg border-2 border-gray-300 text-black">
+                        <div
+                            class="flex justify-left items-left p-4 pb-0 bg-white rounded-lg border-2 border-gray-300 text-black">
                             <div>
                                 <p>You don't have two-factor authentication enabled</p>
                                 <form action="/user/two-factor-authentication" method="post">
@@ -103,7 +105,8 @@
         @else
             @if (request()->user()->two_factor_secret)
                 <div class="w-1/2 p-4 mx-auto">
-                    <div class="flex justify-left items-left p-4 bg-white rounded-lg border-2 border-gray-300 text-black">
+                    <div
+                        class="flex justify-left items-left p-4 pb-0 bg-white rounded-lg border-2 border-gray-300 text-black">
                         <div>
                             <p>You have two-factor authentication enabled</p>
                             <form action="/user/two-factor-authentication" method="post">
@@ -119,7 +122,8 @@
                 </div>
             @else
                 <div class="w-1/2 p-4 mx-auto">
-                    <div class="flex justify-left items-left p-4 bg-white rounded-lg border-2 border-gray-300 text-black">
+                    <div
+                        class="flex justify-left items-left p-4 pb-0 bg-white rounded-lg border-2 border-gray-300 text-black">
                         <div>
                             <p>You don't have two-factor authentication enabled</p>
                             <form action="/user/two-factor-authentication" method="post">
