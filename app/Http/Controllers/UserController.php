@@ -2,15 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
+
 class UserController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('home');
     }
 
-    public function show()
+    public function show(): View
     {
         return view('settings');
+    }
+
+    public function editUserInfo(): View
+    {
+        return view('auth.profile-info');
+    }
+
+    public function update(): RedirectResponse
+    {
+        request()->validate([
+            'name' => ['required', 'min:3', 'string', 'max:255'],
+            'email' => ['required', 'email', 'string', 'max:255']
+        ]);
+
+        $user = Auth::user();
+        $request = (object)request()->all();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->save();
+
+        return \redirect('/');
     }
 }

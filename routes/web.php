@@ -38,3 +38,5 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 
 // Profile
 Route::get('/settings', [UserController::class, 'show']);
+Route::get('/profile/edit', [UserController::class, 'editUserInfo']);
+Route::post('/profile/update', [UserController::class, 'update']);
