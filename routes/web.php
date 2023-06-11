@@ -43,6 +43,3 @@ Route::post('/profile/update', [UserController::class, 'update']);
 
 // Dashboard
 Route::get('/dashboard', [UserController::class, 'dashboard']);
-
-// Placeholder
-Route::get('/users', [UserController::class, 'accounts']);

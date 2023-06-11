@@ -46,9 +46,4 @@ class UserController extends Controller
 
         return \redirect('settings');
     }
-
-    public function accounts()
-    {
-        $response = Http::get();
-    }
 }
