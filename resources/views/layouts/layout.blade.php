@@ -53,11 +53,6 @@
                         @endauth
                         @guest
                             <li>
-                                <a href="/"
-                                   class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 dark:text-white md:dark:text-blue-500"
-                                   aria-current="page">Home</a>
-                            </li>
-                            <li>
                                 <a href="/login"
                                    class="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
                             </li>

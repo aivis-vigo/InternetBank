@@ -33,13 +33,15 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'store']);
 });
 
-// Logout
-Route::get('/logout', [LogoutController::class, 'logout']);
+Route::middleware('auth')->group(function () {
+    // Logout
+    Route::get('/logout', [LogoutController::class, 'logout']);
 
-// Profile
-Route::get('/settings', [UserController::class, 'show']);
-Route::get('/profile/edit', [UserController::class, 'editUserInfo']);
-Route::post('/profile/update', [UserController::class, 'update']);
+    // Profile
+    Route::get('/settings', [UserController::class, 'show']);
+    Route::get('/profile/edit', [UserController::class, 'editUserInfo']);
+    Route::post('/profile/update', [UserController::class, 'update']);
 
-// Dashboard
-Route::get('/dashboard', [UserController::class, 'dashboard']);
+    // Dashboard
+    Route::get('/dashboard', [UserController::class, 'dashboard']);
+});
