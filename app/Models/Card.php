@@ -18,4 +18,9 @@ class Card extends Model
         'expires_at',
         'cvc'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

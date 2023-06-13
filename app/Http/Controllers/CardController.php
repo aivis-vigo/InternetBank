@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class CardController extends Controller
 {
     public function index(): View
     {
-        return view('auth.cards');
+        $cards = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->get();
+
+        return view('auth.cards', [
+            'name' => Auth::user()->name,
+            'cards' => $cards
+        ]);
     }
     public function add(): View
     {
