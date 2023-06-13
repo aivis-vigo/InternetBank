@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
-use PHPUnit\Event\Runtime\PHP;
 
 class UserController extends Controller
 {
@@ -42,9 +40,8 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-
         $user->save();
 
-        return \redirect('settings');
+        return redirect('settings');
     }
 }

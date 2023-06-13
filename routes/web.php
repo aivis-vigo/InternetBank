@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
@@ -23,25 +24,31 @@ Route::get('/', [UserController::class, 'index']);
 
 // Login
 Route::middleware('guest')->group(function () {
+    // Login
     Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-});
 
-// Register
-Route::middleware('guest')->group(function () {
+    // Register
     Route::get('/register', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
-    // Logout
-    Route::get('/logout', [LogoutController::class, 'logout']);
+    // Dashboard
+    Route::get('/dashboard', [UserController::class, 'dashboard']);
+
+    //Cards
+    Route::get('/cards', [CardController::class, 'index']);
 
     // Profile
-    Route::get('/settings', [UserController::class, 'show']);
     Route::get('/profile/edit', [UserController::class, 'editUserInfo']);
     Route::post('/profile/update', [UserController::class, 'update']);
 
-    // Dashboard
-    Route::get('/dashboard', [UserController::class, 'dashboard']);
+    // Settings
+    Route::get('/settings', [UserController::class, 'show']);
+    Route::get('/add-card', [CardController::class, 'add']);
+    Route::post('/add-card', [CardController::class, 'save']);
+
+    // Logout
+    Route::get('/logout', [LogoutController::class, 'logout']);
 });

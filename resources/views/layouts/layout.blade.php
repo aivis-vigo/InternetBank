@@ -41,6 +41,11 @@
                                    aria-current="page">Dashboard</a>
                             </li>
                             <li>
+                                <a href="/cards"
+                                   class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 dark:text-white md:dark:text-blue-500"
+                                   aria-current="page">Cards</a>
+                            </li>
+                            <li>
                                 <a href="/settings"
                                    class="block py-2 pl-3 pr-4 text-red bg-red-500 rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 dark:text-red md:dark:text-red-500"
                                    aria-current="page">Settings</a>

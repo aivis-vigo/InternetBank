@@ -11,20 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bankCards', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->string('card_id');
-            $table->float('balance');
-        });
-
-        /**
-        if (Schema::hasColumn('bankCards', 'id')) {
-            Schema::table('bankCards', function (Blueprint $table) {
-                $table->dropColumn('id');
+        if (!Schema::hasTable('bankCards')) {
+            Schema::create('bankCards', function (Blueprint $table) {
+                $table->id();
+                $table->integer('user_id');
+                $table->float('balance')->nullable();
+                $table->bigInteger('card_number');
+                $table->string('expires_at');
+                $table->string('cvc');
             });
         }
-         */
     }
 
     /**
