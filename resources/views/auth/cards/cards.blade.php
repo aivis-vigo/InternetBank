@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="mx-auto mt-6">
-        @foreach($cards as $card)
+        @forelse($cards as $card)
             <div class="mb-6 w-1/2">
                 <div
                     class="w-96 h-56 m-auto bg-blue-500 rounded-xl relative text-white transition-transform transform hover:scale-110">
@@ -52,7 +52,9 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <p>You don't have any cards!</p>
+        @endforelse
     </div>
 @endsection
 
