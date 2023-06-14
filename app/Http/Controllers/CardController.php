@@ -39,6 +39,6 @@ class CardController extends Controller
             'cvc' => $attributes['card_cvc']
         ]);
 
-        return redirect('/dashboard');
+        return redirect('/cards');
     }
 }
