@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function editUserInfo(): View
     {
-        return view('auth.profile-info');
+        return view('auth.settings.profile-info');
     }
 
     public function update(): RedirectResponse

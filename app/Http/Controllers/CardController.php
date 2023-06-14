@@ -14,14 +14,14 @@ class CardController extends Controller
     {
         $cards = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->get();
 
-        return view('auth.cards', [
+        return view('auth.cards.cards', [
             'name' => Auth::user()->name,
             'cards' => $cards
         ]);
     }
     public function add(): View
     {
-        return  view('auth.add-card');
+        return  view('auth.cards.add-card');
     }
 
     public function save(): RedirectResponse
