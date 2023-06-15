@@ -3,6 +3,7 @@
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,17 +38,21 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [UserController::class, 'dashboard']);
 
+    // Payment
+    Route::get('/payment', [PaymentController::class, 'index']);
+    Route::post('/payment/validate', [PaymentController::class, 'validateTransaction']);
+
     //Cards
     Route::get('/cards', [CardController::class, 'index']);
-
-    // Profile
-    Route::get('/profile/edit', [UserController::class, 'editUserInfo']);
-    Route::post('/profile/update', [UserController::class, 'update']);
 
     // Settings
     Route::get('/settings', [UserController::class, 'show']);
     Route::get('/add-card', [CardController::class, 'add']);
     Route::post('/add-card', [CardController::class, 'save']);
+
+    // Profile
+    Route::get('/profile/edit', [UserController::class, 'editUserInfo']);
+    Route::post('/profile/update', [UserController::class, 'update']);
 
     // Logout
     Route::get('/logout', [LogoutController::class, 'logout']);
