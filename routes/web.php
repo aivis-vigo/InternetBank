@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PaymentController;
@@ -36,7 +37,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // Dashboard
-    Route::get('/dashboard', [UserController::class, 'dashboard']);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     // Payment
     Route::get('/payment', [PaymentController::class, 'index']);

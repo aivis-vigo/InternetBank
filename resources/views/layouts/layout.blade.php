@@ -41,7 +41,7 @@
                                    aria-current="page">Dashboard</a>
                             </li>
                             <li>
-                                <button id="paymentDropdownNavbarLink" data-dropdown-toggle="paymentDropdownNavbar"
+                                <button id="paymentDropdownLink" data-dropdown-toggle="paymentDropdown"
                                         class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                                     Payment
                                     <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -52,7 +52,7 @@
                                     </svg>
                                 </button>
                                 <!-- Dropdown menu -->
-                                <div id="paymentDropdownNavbar"
+                                <div id="paymentDropdown"
                                      class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
                                         aria-labelledby="dropdownLargeButton">
@@ -64,7 +64,7 @@
                                 </div>
                             </li>
                             <li>
-                                <button id="cardDropdownNavbarLink" data-dropdown-toggle="cardDropdownNavbar"
+                                <button id="cardDropdownLink" data-dropdown-toggle="cardDropdown"
                                         class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                                     Cards
                                     <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -75,7 +75,7 @@
                                     </svg>
                                 </button>
                                 <!-- Dropdown menu -->
-                                <div id="cardDropdownNavbar"
+                                <div id="cardDropdown"
                                      class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-400"
                                         aria-labelledby="dropdownLargeButton">
