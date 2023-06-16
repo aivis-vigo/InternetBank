@@ -87,7 +87,7 @@
                 <label class="relative w-full flex flex-col">
                     <span class="font-bold mb-3">Name</span>
                     <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
-                           type="number"
+                           type="text"
                            name="receiver_name" placeholder="0000 0000 0000 0000" required/>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
@@ -124,6 +124,12 @@
             </p>
             @enderror
         </div>
+
+        @if (!empty($message))
+        <div class="mx-auto">
+            {{$message}}
+        </div>
+        @endif
 
         <div class="w-full">
             <button type="submit"
