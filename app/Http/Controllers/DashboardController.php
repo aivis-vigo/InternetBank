@@ -14,13 +14,15 @@ class DashboardController extends Controller
         $cards = DB::table('bankCards')->where('user_id', $userId)->get();
         $history = $cards[0]->history;
 
-        if (empty($history)) {
-            $history = null;
+        if (!empty($history)) {
+            $transactions = explode('.', $history);
+        } else {
+            $transactions = [];
         }
 
         return view('auth.dashboard', [
             'cards' => $cards,
-            'history' => explode('.', $history)
+            'history' => $transactions
         ]);
     }
 }
