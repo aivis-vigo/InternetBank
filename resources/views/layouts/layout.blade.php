@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<body class="bg-gray-200">
+<body class="bg-gray-100">
 
 <div class="flex flex-col h-screen justify-between">
     @section('navbar')

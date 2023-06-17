@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="grid h-full w-full bg-gray-200 text-black">
+    <div class="grid h-full w-full bg-gray-100 text-black">
         <p class="sm:w-1/2 text-justify p-6 mx-auto">Welcome to CryptoBank, your premier destination for
             secure online banking and cryptocurrency
             management. We
