@@ -64,7 +64,15 @@
                                 <div>
                                     {{$transaction->transaction_name}}
                                 </div>
-                                <p>-{{number_format($transaction->transaction_amount / 100, 2)}} €</p>
+                                @if(!($transaction->transaction_amount > 0))
+                                    <p class="text-red-500">
+                                        {{number_format($transaction->transaction_amount / 100, 2)}} €
+                                    </p>
+                                @else
+                                    <p class="text-green-500">
+                                        {{number_format($transaction->transaction_amount / 100, 2)}} €
+                                    </p>
+                                @endif
                             </div>
                             <div class="text-center">
                                 {{$transaction->created_at}}

@@ -12,7 +12,7 @@
 </head>
 <body class="bg-gray-100">
 
-<div class="flex flex-col h-screen justify-between">
+<div class="flex flex-col min-h-screen justify-between">
     @section('navbar')
         <nav class="bg-white border-gray-200 dark:bg-gray-900">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

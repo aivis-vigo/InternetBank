@@ -100,7 +100,7 @@
         </div>
 
         <div class="w-full">
-            <div class="flex gap-x-4">
+            <div class="flex gap-x-4 md:flex-col">
                 <label class="relative w-full flex flex-col">
                     <span class="font-bold mb-3">Name</span>
                     <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
