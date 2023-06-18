@@ -14,7 +14,7 @@
                     <div class="w-full md:w-1/2 bg-white mb-4 p-4 border-2 rounded-lg border-gray-300">
                         <button id="cardNumberDropdown" data-dropdown-toggle="cardNumber"
                                 class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                            {{chunk_split($cards[0]->card_number, 4, ' ')}}
+                            {{chunk_split($account->card_number, 4, ' ')}}
                             <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -49,21 +49,25 @@
 
                     </div>
                     <div class="w-full md:w-1/2 bg-white mb-4 p-4 border-2 rounded-lg border-gray-300">
-                        @if($cards[0]->balance != null)
-                            € {{$cards[0]->balance}}
+                        @if($account->balance != null)
+                            € {{number_format($account->balance / 100, 2)}}
                         @else
                             € 0
                         @endif
                     </div>
                 </div>
+
                 <div class="w-full md:w-full md:h-full bg-white p-4 border-2 rounded-lg border-gray-300">
-                    @forelse($history as $purchase)
+                    @forelse($history as $transaction)
                         <div class="flex-col">
                             <div class="flex justify-between my-2 rounded-lg">
                                 <div>
-                                    {{$purchase}}
+                                    {{$transaction->transaction_name}}
                                 </div>
-                                <p>-Amount spent here €</p>
+                                <p>-{{number_format($transaction->transaction_amount / 100, 2)}} €</p>
+                            </div>
+                            <div class="text-center">
+                                {{$transaction->created_at}}
                             </div>
 
                             <div class="w-full">

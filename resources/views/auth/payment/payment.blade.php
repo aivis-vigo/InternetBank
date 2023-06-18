@@ -21,7 +21,6 @@
             </svg>
         </label>
 
-
         <label class="relative flex-1 flex flex-col">
             <span class="font-bold mb-3">Expire date</span>
             <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="text"
@@ -58,6 +57,18 @@
             </svg>
         </label>
 
+        <label class="relative w-full flex flex-col">
+            <span class="font-bold mb-3">Amount</span>
+            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="text"
+                   name="amount" placeholder="69.50" required/>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+            </svg>
+        </label>
+
         <div class="w-full flex flex-col">
             @error('card_number')
             <p class="text-red-500 text-xs mt-2">
@@ -76,6 +87,12 @@
                 {{ $message }}
             </p>
             @enderror
+
+            @error('amount')
+            <p class="text-red-500 text-xs mt-2">
+                {{ $message }}
+            </p>
+            @enderror
         </div>
 
         <div class="w-full">
@@ -88,7 +105,7 @@
                     <span class="font-bold mb-3">Name</span>
                     <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
                            type="text"
-                           name="receiver_name" placeholder="0000 0000 0000 0000" required/>
+                           name="receiver_name" placeholder="John Doe" required/>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor">

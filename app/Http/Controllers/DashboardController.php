@@ -10,18 +10,19 @@ class DashboardController extends Controller
 {
     public function index(): View
     {
-        $userId = Auth::user()->getAuthIdentifier();
-        $cards = DB::table('bankCards')->where('user_id', $userId)->get();
-        $history = $cards[0]->history;
+        $transactions = [];
+        $customerId = Auth::user()->getAuthIdentifier();
+        $account = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->first();
+        $accountCards = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->get();
+        $transactionHistory = DB::table('cardHistory')->where('card_id', $customerId)->get();
 
-        if (!empty($history)) {
-            $transactions = explode('.', $history);
-        } else {
-            $transactions = [];
+        foreach ($transactionHistory as $transaction) {
+            $transactions[] = $transaction;
         }
 
         return view('auth.dashboard', [
-            'cards' => $cards,
+            'account' => $account,
+            'cards' => $accountCards,
             'history' => $transactions
         ]);
     }
