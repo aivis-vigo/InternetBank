@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Card;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,23 +29,30 @@ class PaymentController extends Controller
         $transactionRequest = (object)request()->all();
 
         // Selects customers for transaction
-        $customer = $customer->select('*')->whereIn('card_number', [$transactionRequest->card_number, $transactionRequest->receiver_card_number])->get();
-        //$customerCard = $customer->where('card_number', $transactionRequest->card_number)->first();
-        //$receiverCard = $customer->where('card_number', $transactionRequest->receiver_card_number)->first();
+        $customer = $customer->select('*')->whereIn('card_number', [
+            $transactionRequest->card_number, $transactionRequest->receiver_card_number
+        ])->get();
 
-        if (!empty($customerCard)) {
+        if ($customer[0]->card_number != $transactionRequest->card_number) {
+            $customer = $customer->reverse();
+        }
+
+        if (count($customer) == 2) {
             $amount = (int)($transactionRequest->amount * 100);
-            $subtractFromBalance = (int)$customer[0]->balance - $amount;
-            $addToBalance = (int)$customer[1]->balance + $amount;
 
             // Subtract
-            DB::update('update bankCards set balance = ? where card_number = ?', [$subtractFromBalance, $transactionRequest->card_number]);
+            DB::update('update bankCards set balance = balance - ? where card_number = ?', [
+                $amount,
+                $transactionRequest->card_number
+            ]);
             // Add
-            DB::update('update bankCards set balance = ? where card_number = ?', [$addToBalance, $transactionRequest->receiver_card_number]);
+            DB::update('update bankCards set balance = balance + ? where card_number = ?', [
+                $amount,
+                $transactionRequest->receiver_card_number
+            ]);
 
             // Select users card
-            $userCards = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->first();
-            $cardID = $userCards->id;
+            $userCards = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->first('user_id');
 
             // Receiver card
             $receiver = DB::table('bankCards')->where('card_number', $transactionRequest->receiver_card_number)->first('user_id');
@@ -55,7 +61,7 @@ class PaymentController extends Controller
             DB::table('cardHistory')->insert([
                 // Initiator
                 [
-                    'card_id' => $cardID,
+                    'card_id' => $userCards->user_id,
                     'transaction_name' => $transactionRequest->receiver_name,
                     'transaction_amount' => -(int)($transactionRequest->amount * 100),
                     'created_at' => Carbon::now()->toDateTimeString()
