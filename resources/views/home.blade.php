@@ -16,7 +16,7 @@
                 Internet Bank
             </div>
             <div class="text-white text-3xl font-bold">
-                + Crypto features included
+                + Crypto included
             </div>
         </div>
     </div>

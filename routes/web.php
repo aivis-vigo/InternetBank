@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PaymentController;
@@ -43,8 +44,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment', [PaymentController::class, 'index']);
     Route::post('/payment/validate', [PaymentController::class, 'validateTransaction']);
 
-    //Cards
+    // Cards
     Route::get('/cards', [CardController::class, 'index']);
+
+    // Invest
+    Route::get('/invest', [InvestmentController::class, 'index']);
 
     // Settings
     Route::get('/settings', [UserController::class, 'show']);

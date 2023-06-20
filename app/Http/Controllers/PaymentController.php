@@ -33,10 +33,6 @@ class PaymentController extends Controller
             $transactionRequest->card_number, $transactionRequest->receiver_card_number
         ])->get();
 
-        if ($customer[0]->card_number != $transactionRequest->card_number) {
-            $customer = $customer->reverse();
-        }
-
         if (count($customer) == 2) {
             $amount = (int)($transactionRequest->amount * 100);
 
@@ -53,7 +49,6 @@ class PaymentController extends Controller
 
             // Select users card
             $userCards = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->first('user_id');
-
             // Receiver card
             $receiver = DB::table('bankCards')->where('card_number', $transactionRequest->receiver_card_number)->first('user_id');
 

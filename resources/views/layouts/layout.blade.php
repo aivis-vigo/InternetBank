@@ -90,6 +90,11 @@
                                 </div>
                             </li>
                             <li>
+                                <a href="/invest"
+                                   class="block py-2 pl-3 pr-4 text-red bg-red-500 rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 dark:text-red md:dark:text-red-500"
+                                   aria-current="page">Invest</a>
+                            </li>
+                            <li>
                                 <a href="/settings"
                                    class="block py-2 pl-3 pr-4 text-red bg-red-500 rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 dark:text-red md:dark:text-red-500"
                                    aria-current="page">Settings</a>
