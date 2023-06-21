@@ -15,9 +15,6 @@
             <div class="border-2 border-blue-300">
                 Assets
             </div>
-            <div class="border-2 border-blue-300">
-                Buy crypto
-            </div>
         </div>
     </main>
 @endsection

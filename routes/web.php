@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CoinController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\LoginController;
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
 
     // Invest
     Route::get('/invest', [InvestmentController::class, 'index']);
+    Route::get('/coins', [CoinController::class, 'index']);
 
     // Settings
     Route::get('/settings', [UserController::class, 'show']);
