@@ -14,7 +14,7 @@ class CoinController extends Controller
 
         $parameters = [
             'start' => '1',
-            'limit' => '8',
+            'limit' => '25',
             'convert' => 'EUR'
         ];
 

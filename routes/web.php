@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     // Invest
     Route::get('/invest', [InvestmentController::class, 'index']);
     Route::get('/coins', [CoinController::class, 'index']);
-    Route::get('/coins/{id}', function (string $coinID) {
+    Route::get('/coin/{id}', function (string $coinID) {
         return (new CoinController())->show($coinID);
     });
 

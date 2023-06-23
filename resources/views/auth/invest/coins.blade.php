@@ -18,7 +18,7 @@
 
         <div class="my-2">.
             @foreach ($coins->data as $coin)
-                <a href="/coins/{{ $coin->id }}">
+                <a href="/coin/{{ $coin->id }}">
                     <div class="flex justify-between text-center p-2 my-2 w-full hover:bg-gray-300 hover:rounded-lg hover:transition duration-200">
                         <div class="flex-1">{{ $coin->cmc_rank }}</div>
                         <div class="flex flex-1 gap-x-2">
