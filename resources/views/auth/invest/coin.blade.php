@@ -10,20 +10,20 @@
     <div class="mx-auto flex-col w-1/2 p-4 border-2 border-gray-300 rounded-lg bg-white">
         <div class="flex">
             <div>
-                <img src="https://s2.coinmarketcap.com/static/img/coins/128x128/{{$coin->id}}.png">
+                <img src="https://s2.coinmarketcap.com/static/img/coins/128x128/{{ $coin->id }}.png">
             </div>
             <div class="flex-col ml-4">
                 <div class="my-2">
-                    ID: {{$coin->id}}
+                    ID: {{ $coin->id }}
                 </div>
                 <div class="my-2">
-                    Symbol: {{$coin->symbol}}
+                    Symbol: {{ $coin->symbol }}
                 </div class="my-2">
                 <div>
-                    Name: {{$coin->name}}
+                    Name: {{ $coin->name }}
                 </div>
                 <div class="my-2">
-                    Price: {{number_format($coin->quote->EUR->price, 2)}}
+                    Price: {{ $coin->quote->EUR->price }}
                 </div>
             </div>
         </div>
@@ -31,60 +31,97 @@
         <hr class="h-px bg-gray-300 border-0 dark:bg-gray-700">
 
         <div class="my-2">
-            Market capital: {{number_format($coin->quote->EUR->market_cap, 2)}}
+            Market capital: {{ $coin->quote->EUR->market_cap }}
         </div>
         <div class="my-2">
-            Market capital dominance: {{number_format($coin->quote->EUR->market_cap_dominance, 2)}}
+            Market capital dominance: {{ $coin->quote->EUR->market_cap_dominance }}
         </div>
         <div class="my-2">
-            Market pairs: {{$coin->num_market_pairs}}
+            Market pairs: {{ $coin->num_market_pairs }}
         </div>
         <div class="my-2">
-            Circulating supply: {{number_format($coin->circulating_supply, 2)}}
+            Circulating supply: {{ $coin->circulating_supply }}
         </div>
 
         <hr class="h-px bg-gray-300 border-0 dark:bg-gray-700">
 
         <div class="flex gap-x-4 my-2">
             <div>
-                Volume 24H: {{number_format($coin->quote->EUR->volume_24h, 2)}}
+                <div class="flex-col">
+                    Volume 24H:
+                </div>
+                <div>
+                    {{ $coin->quote->EUR->volume_24h }}
+                </div>
             </div>
-            <div>
-                Volume change 24H: {{number_format($coin->quote->EUR->volume_change_24h, 2)}}
+            <div class="flex-col">
+                <div>
+                    Volume change 24H:
+                </div>
+                <div>
+                    {{ $coin->quote->EUR->volume_change_24h }}
+                </div>
             </div>
         </div>
 
         <hr class="h-px bg-gray-300 border-0 dark:bg-gray-700">
 
-        <div class="flex my-2">
-            <div>
-                Change (%) 1h: {{number_format($coin->quote->EUR->percent_change_1h, 2)}}
-            </div>
-            <div>
-                Change (%) 24h: {{number_format($coin->quote->EUR->percent_change_24h, 2)}}
-            </div>
-            <div>
-                Change (%) 7d: {{number_format($coin->quote->EUR->percent_change_7d, 2)}}
-            </div>
-            <div>
-                Change (%) 30d: {{number_format($coin->quote->EUR->percent_change_30d, 2)}}
-            </div>
-            <div>
-                Change (%) 60d: {{number_format($coin->quote->EUR->percent_change_60d, 2)}}
-            </div>
-            <div>
-                Change (%) 90d: {{number_format($coin->quote->EUR->percent_change_90d, 2)}}
-            </div>
+        <div class="flex my-2 justify-between">
+            @foreach($percentChange as $timeInterval)
+                <div class="flex-col">
+                    <div>
+                        {{$timeInterval}}:
+                    </div>
+                    @switch($interval = $coin->quote->EUR->{'percent_change_' . $timeInterval})
+                        @case($interval < 0)
+                            <div class="flex gap-x-1">
+                                <svg class="h-5 w-5 text-red-500" width="24" height="24" viewBox="0 0 24 24"
+                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z"/>
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <line x1="8" y1="12" x2="12" y2="16"/>
+                                    <line x1="12" y1="8" x2="12" y2="16"/>
+                                    <line x1="16" y1="12" x2="12" y2="16"/>
+                                </svg>
+                                <div class="text-red-500">
+                                    {{ number_format($coin->quote->EUR->{'percent_change_' . $timeInterval}, 4) }}
+                                </div>
+                            </div>
+                            @break
+                        @case($interval > 0)
+                            <div class="flex gap-x-1">
+                                <svg class="h-5 w-5 text-green-500" width="24" height="24" viewBox="0 0 24 24"
+                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z"/>
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <line x1="12" y1="8" x2="8" y2="12"/>
+                                    <line x1="12" y1="8" x2="12" y2="16"/>
+                                    <line x1="16" y1="12" x2="12" y2="8"/>
+                                </svg>
+                                <div class="text-green-500">
+                                    </svg>{{ number_format($coin->quote->EUR->{'percent_change_' . $timeInterval}, 4) }}
+                                </div>
+                            </div>
+                            @break
+                        @default
+                            <div>
+                                {{ $coin->quote->EUR->{'percent_change_' . $timeInterval} }}
+                            </div>
+                    @endswitch
+                </div>
+            @endforeach
         </div>
 
         <hr class="h-px bg-gray-300 border-0 dark:bg-gray-700">
 
         <div class="flex justify-between my-2">
             <div>
-                Last updated: {{date('d-m-Y-H:i:s', strtotime($coin->quote->EUR->last_updated))}}
+                Last updated: {{ date('d-m-Y-H:i:s', strtotime($coin->quote->EUR->last_updated)) }}
             </div>
             <div>
-                Date added: {{date('d-m-Y', strtotime($coin->date_added))}}
+                Date added: {{ date('d-m-Y', strtotime($coin->date_added)) }}
             </div>
         </div>
     </div>

@@ -33,13 +33,13 @@ class CoinController extends Controller
         ]);
     }
 
-    public function show()
+    public function show(string $coinID): View
     {
         $client = new Client();
         $key = 'f882b284-925c-42cd-8644-7f1c9d152d2c';
 
         $parameters = [
-            'id' => 1038,
+            'id' => $coinID,
             'convert' => 'EUR'
         ];
 
@@ -59,6 +59,7 @@ class CoinController extends Controller
 
         return view('auth.invest.coin', [
             'coin' => $response,
+            'percentChange' => ['1h', '24h', '7d', '30d', '60d', '90d']
         ]);
     }
 }
