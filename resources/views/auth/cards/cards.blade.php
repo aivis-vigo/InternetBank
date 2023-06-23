@@ -18,10 +18,10 @@
                                 <p class="font-light">
                                     Name
                                 <p class="font-medium tracking-widest">
-                                    {{$name}}
+                                    {{ $name }}
                                 </p>
                             </div>
-                            <img class="w-14 h-14" src="../mastercard.png"/>
+                            <img class="w-14 h-14" src="../mastercard.png" alt="mastercard.png"/>
                         </div>
                         <div class="pt-1">
                             <p class="font-light">
@@ -36,7 +36,7 @@
                                     <p class="font-light text-xs text-xs">
                                         Expiry
                                     <p class="font-medium tracking-wider text-sm">
-                                        {{$card->expires_at}}
+                                        {{ $card->expires_at }}
                                     </p>
                                 </div>
 
@@ -44,7 +44,7 @@
                                     <p class="font-light text-xs">
                                         CVV
                                     <p class="font-bold tracking-more-wider text-sm">
-                                        {{$card->cvc}}
+                                        {{ $card->cvc }}
                                     </p>
                                 </div>
                             </div>

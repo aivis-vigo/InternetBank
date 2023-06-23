@@ -18,8 +18,8 @@
                 </div>
                 <div class="my-2">
                     Symbol: {{ $coin->symbol }}
-                </div class="my-2">
-                <div>
+                </div>
+                <div class="my-2">
                     Name: {{ $coin->name }}
                 </div>
                 <div class="my-2">

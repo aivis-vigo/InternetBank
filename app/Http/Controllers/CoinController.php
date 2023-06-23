@@ -9,19 +9,16 @@ class CoinController extends Controller
 {
     public function index(): View
     {
-        $client = new Client();
-        $key = 'f882b284-925c-42cd-8644-7f1c9d152d2c';
-
         $parameters = [
             'start' => '1',
             'limit' => '25',
             'convert' => 'EUR'
         ];
 
-        $response = $client->get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', [
+        $response = (new Client())->get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', [
             'headers' => [
                 'Accepts' => 'application/json',
-                'X-CMC_PRO_API_KEY' => $key,
+                'X-CMC_PRO_API_KEY' => $_ENV['CRYPTO_API'],
             ],
             'query' => $parameters
         ]);
@@ -35,18 +32,15 @@ class CoinController extends Controller
 
     public function show(string $coinID): View
     {
-        $client = new Client();
-        $key = 'f882b284-925c-42cd-8644-7f1c9d152d2c';
-
         $parameters = [
             'id' => $coinID,
             'convert' => 'EUR'
         ];
 
-        $response = $client->get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest', [
+        $response = (new Client())->get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest', [
             'headers' => [
                 'Accepts' => 'application/json',
-                'X-CMC_PRO_API_KEY' => $key,
+                'X-CMC_PRO_API_KEY' => $_ENV['CRYPTO_API'],
             ],
             'query' => $parameters
         ]);

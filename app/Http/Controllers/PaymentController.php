@@ -33,7 +33,9 @@ class PaymentController extends Controller
             $transactionRequest->card_number, $transactionRequest->receiver_card_number
         ])->get();
 
-        if (count($customer) == 2) {
+        if (!(count($customer) == 2)) {
+            $message = 'Invalid transaction!';
+        } else {
             $amount = (int)($transactionRequest->amount * 100);
 
             // Subtract
@@ -71,8 +73,6 @@ class PaymentController extends Controller
             ]);
 
             $message = 'Transaction successful!';
-        } else {
-            $message = 'Invalid transaction!';
         }
 
         return view('auth.payment.payment', [
