@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cd1e921881d62c51bf3b26a0e4bf84b",
+    "content-hash": "182507f08b8937882ae2b681b23ea4e8",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1139,6 +1139,50 @@
                 }
             ],
             "time": "2021-10-07T12:57:01+00:00"
+        },
+        {
+            "name": "ibanapi/api",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ibanapi/ibanapi_php.git",
+                "reference": "7b1a9a2e93b67d5344d246dd45cd7eca785f529f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ibanapi/ibanapi_php/zipball/7b1a9a2e93b67d5344d246dd45cd7eca785f529f",
+                "reference": "7b1a9a2e93b67d5344d246dd45cd7eca785f529f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "IbanApi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ibanapi.com",
+                    "email": "samy@ibanapi.com"
+                }
+            ],
+            "description": "The official php package for the ibanapi.com integration",
+            "keywords": [
+                "IBAN",
+                "finance",
+                "iban api",
+                "iban checker",
+                "iban validation"
+            ],
+            "support": {
+                "issues": "https://github.com/ibanapi/ibanapi_php/issues",
+                "source": "https://github.com/ibanapi/ibanapi_php/tree/1.0.0"
+            },
+            "time": "2021-09-08T18:47:20+00:00"
         },
         {
             "name": "laravel/cashier",
@@ -2578,56 +2622,6 @@
                 "source": "https://github.com/nette/utils/tree/v4.0.0"
             },
             "time": "2023-02-02T10:41:53+00:00"
-        },
-        {
-            "name": "nikic/fast-route",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "181d480e08d9476e61381e04a71b34dc0432e812"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
-                "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35|~5.7"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
-                "psr-4": {
-                    "FastRoute\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov",
-                    "email": "nikic@php.net"
-                }
-            ],
-            "description": "Fast request router for PHP",
-            "keywords": [
-                "router",
-                "routing"
-            ],
-            "support": {
-                "issues": "https://github.com/nikic/FastRoute/issues",
-                "source": "https://github.com/nikic/FastRoute/tree/master"
-            },
-            "time": "2018-02-13T20:26:39+00:00"
         },
         {
             "name": "nikic/php-parser",

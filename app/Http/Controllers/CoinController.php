@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use IbanApi\Api;
 use Illuminate\View\View;
 
 class CoinController extends Controller
@@ -45,15 +46,23 @@ class CoinController extends Controller
             'query' => $parameters
         ]);
 
-        $coin = json_decode($response->getBody()->getContents());
+        $selectedCoin = json_decode($response->getBody()->getContents());
 
-        foreach ($coin->data as $coin) {
-            $response = $coin;
+        foreach ($selectedCoin->data as $coin) {
+            $collected = $coin;
         }
 
         return view('auth.invest.coin', [
-            'coin' => $response,
+            'coin' => $collected,
             'percentChange' => ['1h', '24h', '7d', '30d', '60d', '90d']
         ]);
+    }
+
+    public function validateIban(string $iban): string
+    {
+        $result = (new Api($_ENV['VALIDATE_IBAN']))->validateIBAN($iban);
+        $response = json_decode($result);
+
+        return $response->message;
     }
 }

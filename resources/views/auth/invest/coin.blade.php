@@ -8,23 +8,37 @@
 
 @section('content')
     <div class="mx-auto flex-col w-1/2 p-4 border-2 border-gray-300 rounded-lg bg-white">
-        <div class="flex">
-            <div>
-                <img src="https://s2.coinmarketcap.com/static/img/coins/128x128/{{ $coin->id }}.png">
+        <div class="flex w-full justify-between">
+            <div class="flex">
+                <div>
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/128x128/{{ $coin->id }}.png">
+                </div>
+                <div class="flex-col ml-4">
+                    <div class="my-2">
+                        ID: {{ $coin->id }}
+                    </div>
+                    <div class="my-2">
+                        Symbol: {{ $coin->symbol }}
+                    </div>
+                    <div class="my-2">
+                        Name: {{ $coin->name }}
+                    </div>
+                    <div class="my-2">
+                        Price: {{ $coin->quote->EUR->price }}
+                    </div>
+                </div>
             </div>
-            <div class="flex-col ml-4">
-                <div class="my-2">
-                    ID: {{ $coin->id }}
-                </div>
-                <div class="my-2">
-                    Symbol: {{ $coin->symbol }}
-                </div>
-                <div class="my-2">
-                    Name: {{ $coin->name }}
-                </div>
-                <div class="my-2">
-                    Price: {{ $coin->quote->EUR->price }}
-                </div>
+            <div class="flex flex-col w-1/4 my-auto text-right">
+                <button
+                    type="button"
+                    class="inline-block rounded bg-green-500 hover:bg-green-400 active:bg-green-600 mb-2 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-success-600 focus:bg-success-600 focus:outline-none focus:ring-0 active:bg-success-700 dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)]">
+                    Buy
+                </button>
+                <button
+                    type="button"
+                    class="inline-block rounded bg-red-500 hover:bg-red-400 active:bg-red-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-danger-600 focus:bg-danger-600 focus:outline-none focus:ring-0 active:bg-danger-700 dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]">
+                    Sell
+                </button>
             </div>
         </div>
 

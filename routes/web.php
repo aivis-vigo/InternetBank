@@ -66,4 +66,9 @@ Route::middleware('auth')->group(function () {
 
     // Logout
     Route::get('/logout', [LogoutController::class, 'logout']);
+
+    // Test
+    Route::get('/test/{iban}', function (string $iban) {
+        return (new CoinController())->validateIban($iban);
+    });
 });
