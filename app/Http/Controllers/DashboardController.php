@@ -12,9 +12,9 @@ class DashboardController extends Controller
     {
         $transactions = [];
         $customerId = Auth::user()->getAuthIdentifier();
-        $account = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->first();
-        $accountCards = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->get();
-        $transactionHistory = DB::table('cardHistory')->where('card_id', $customerId)->get();
+        $account = DB::table('bankAccounts')->where('account_id', Auth::user()->getAuthIdentifier())->first();
+        $accountCards = DB::table('bankAccounts')->where('account_id', Auth::user()->getAuthIdentifier())->get();
+        $transactionHistory = DB::table('accountHistory')->where('account_id', $customerId)->get();
 
         foreach ($transactionHistory as $transaction) {
             $transactions[] = $transaction;

@@ -9,10 +9,10 @@
 @section('content')
     <form class="flex flex-wrap gap-3 w-1/2  mx-auto p-5" action="/payment/validate" method="post">
         @csrf
-        <label class="relative w-full flex flex-col">
-            <span class="font-bold mb-3">Card number</span>
-            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="number"
-                   name="card_number" placeholder="0000 0000 0000 0000" required/>
+        <label class="relative flex-1 flex flex-col">
+            <span class="font-bold mb-3">Name</span>
+            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="text"
+                   name="name" placeholder="John Doe" required/>
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,23 +22,11 @@
         </label>
 
         <label class="relative flex-1 flex flex-col">
-            <span class="font-bold mb-3">Expire date</span>
-            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="text"
-                   name="expire_date" placeholder="MM/YY" required/>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-        </label>
-
-        <label class="relative flex-1 flex flex-col">
             <span class="font-bold flex items-center gap-3 mb-3">
-              CVC/CVV
+              Amount
               <span class="relative group">
                 <span
-                    class="hidden group-hover:flex justify-center items-center px-2 py-1 text-xs absolute -right-2 transform translate-x-full -translate-y-1/2 w-max top-1/2 bg-black text-white">Enter last three digits on the signature strip!</span>
+                    class="hidden group-hover:flex justify-center items-center px-2 py-1 text-xs absolute -right-2 transform translate-x-full -translate-y-1/2 w-max top-1/2 bg-black text-white">Amount can't be negative!</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -48,19 +36,19 @@
             </span>
 
             <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="number"
-                   name="card_cvc" placeholder="&bull;&bull;&bull;" required/>
+                   name="amount" placeholder="4.99" required/>
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
             </svg>
         </label>
 
         <label class="relative w-full flex flex-col">
-            <span class="font-bold mb-3">Amount</span>
+            <span class="font-bold mb-3">IBAN</span>
             <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="text"
-                   name="amount" placeholder="69.50" required/>
+                   name="iban_number" placeholder="GR8401197845868294531954798" required/>
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -70,25 +58,19 @@
         </label>
 
         <div class="w-full flex flex-col">
-            @error('card_number')
-            <p class="text-red-500 text-xs mt-2">
-                {{ $message }}
-            </p>
-            @enderror
-
-            @error('expire_date')
-            <p class="text-red-500 text-xs mt-2">
-                {{ $message }}
-            </p>
-            @enderror
-
-            @error('card_cvc')
+            @error('name')
             <p class="text-red-500 text-xs mt-2">
                 {{ $message }}
             </p>
             @enderror
 
             @error('amount')
+            <p class="text-red-500 text-xs mt-2">
+                {{ $message }}
+            </p>
+            @enderror
+
+            @error('iban_number')
             <p class="text-red-500 text-xs mt-2">
                 {{ $message }}
             </p>
@@ -105,7 +87,7 @@
                     <span class="font-bold mb-3">Name</span>
                     <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
                            type="text"
-                           name="receiver_name" placeholder="John Doe" required/>
+                           name="receiver_name" placeholder="Jane Doe" required/>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -114,10 +96,10 @@
                     </svg>
                 </label>
                 <label class="relative w-full flex flex-col">
-                    <span class="font-bold mb-3">Card number</span>
+                    <span class="font-bold mb-3">IBAN</span>
                     <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
-                           type="number"
-                           name="receiver_card_number" placeholder="0000 0000 0000 0000" required/>
+                           type="text"
+                           name="receiver_iban_number" placeholder="IT64L0300203280562459785426" required/>
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -6,15 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        if (!Schema::hasTable('cardHistory')) {
-            Schema::create('cardHistory', function (Blueprint $table) {
+        if (!Schema::hasTable('accountHistory')) {
+            Schema::create('accountHistory', function (Blueprint $table) {
                 $table->id();
-                $table->integer('card_id');
+                $table->integer('account_id');
                 $table->string('transaction_name');
                 $table->bigInteger('transaction_amount');
                 $table->timestamps();
@@ -22,11 +19,8 @@ return new class extends Migration
         }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('cardHistory');
+        Schema::dropIfExists('accountHistory');
     }
 };

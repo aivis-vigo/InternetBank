@@ -14,7 +14,7 @@
                     <div class="w-full md:w-1/2 bg-white mb-4 p-4 border-2 rounded-lg border-gray-300">
                         <button id="cardNumberDropdown" data-dropdown-toggle="cardNumber"
                                 class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                            {{chunk_split($account->card_number, 4, ' ')}}
+                            {{$account->IBAN}}
                             <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -32,7 +32,7 @@
                                     <li>
                                         <a href="#"
                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                            {{chunk_split($card->card_number, 4, ' ')}}
+                                            {{$card->IBAN}}
                                         </a>
                                     </li>
                                 @empty

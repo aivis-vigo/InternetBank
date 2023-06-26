@@ -17,20 +17,18 @@ class PaymentController extends Controller
     public function validateTransaction(): View
     {
         request()->validate([
-            'card_number' => ['string', 'min:16', 'max:16', 'required'],
-            'expire_date' => ['string', 'min:5', 'max:5', 'required'],
-            'card_cvc' => ['string', 'min:3', 'max:3', 'required'],
+            'name' => ['string', 'min:3', 'max:50', 'required'],
             'amount' => ['string', 'min:1', 'required'],
-            'receiver_name' => ['string', 'min:3', 'max:255', 'required'],
-            'receiver_card_number' => ['string', 'min:16', 'max:16', 'required']
+            'iban_number' => ['string', 'min:16', 'max:30', 'required'],
+            'receiver_name' => ['string', 'min:3', 'max:50', 'required'],
+            'receiver_iban_number' => ['string', 'min:16', 'max:30', 'required']
         ]);
 
-        $customer = DB::table('bankCards');
         $transactionRequest = (object)request()->all();
 
         // Selects customers for transaction
-        $customer = $customer->select('*')->whereIn('card_number', [
-            $transactionRequest->card_number, $transactionRequest->receiver_card_number
+        $customer = DB::table('bankAccounts')->select('*')->whereIn('IBAN', [
+            $transactionRequest->iban_number, $transactionRequest->receiver_iban_number
         ])->get();
 
         if (!(count($customer) == 2)) {
@@ -38,34 +36,32 @@ class PaymentController extends Controller
         } else {
             $amount = (int)($transactionRequest->amount * 100);
 
-            // Subtract
-            DB::update('update bankCards set balance = balance - ? where card_number = ?', [
+            DB::update('update bankAccounts set balance = balance - ? where IBAN = ?', [
                 $amount,
-                $transactionRequest->card_number
+                $transactionRequest->iban_number
             ]);
-            // Add
-            DB::update('update bankCards set balance = balance + ? where card_number = ?', [
+            DB::update('update bankAccounts set balance = balance + ? where IBAN = ?', [
                 $amount,
-                $transactionRequest->receiver_card_number
+                $transactionRequest->receiver_iban_number
             ]);
 
-            // Select users card
-            $userCards = DB::table('bankCards')->where('user_id', Auth::user()->getAuthIdentifier())->first('user_id');
-            // Receiver card
-            $receiver = DB::table('bankCards')->where('card_number', $transactionRequest->receiver_card_number)->first('user_id');
+            // Select users account
+            $userCards = DB::table('bankAccounts')->where('account_id', Auth::user()->getAuthIdentifier())->first('account_id');
+            // Receiver account
+            $receiver = DB::table('bankAccounts')->where('IBAN', $transactionRequest->receiver_iban_number)->first('account_id');
 
             // Register transaction info for card
-            DB::table('cardHistory')->insert([
+            DB::table('accountHistory')->insert([
                 // Initiator
                 [
-                    'card_id' => $userCards->user_id,
+                    'account_id' => $userCards->account_id,
                     'transaction_name' => $transactionRequest->receiver_name,
                     'transaction_amount' => -(int)($transactionRequest->amount * 100),
                     'created_at' => Carbon::now()->toDateTimeString()
                 ],
                 // Receiver
                 [
-                    'card_id' => $receiver->user_id,
+                    'account_id' => $receiver->account_id,
                     'transaction_name' => Auth::user()->name,
                     'transaction_amount' => +(int)($transactionRequest->amount * 100),
                     'created_at' => Carbon::now()->toDateTimeString()
