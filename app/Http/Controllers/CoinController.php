@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accounts;
+use App\Models\Card;
 use GuzzleHttp\Client;
-use IbanApi\Api;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Stripe\BankAccount;
 
 class CoinController extends Controller
 {
@@ -48,13 +51,18 @@ class CoinController extends Controller
 
         $selectedCoin = json_decode($response->getBody()->getContents());
 
-        foreach ($selectedCoin->data as $coin) {
-            $collected = $coin;
-        }
+        foreach ($selectedCoin->data as $coin) {}
+
+        $balance = Accounts::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
 
         return view('auth.invest.coin', [
-            'coin' => $collected,
+            'coin' => $coin,
+            'rangeMax' => number_format($balance / 100 / $coin->quote->EUR->price, 4),
             'percentChange' => ['1h', '24h', '7d', '30d', '60d', '90d']
         ]);
+    }
+
+    public function test() {
+        var_dump(request()->all());die;
     }
 }

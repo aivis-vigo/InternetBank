@@ -11,7 +11,6 @@ class Card extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $table = 'bankCards';
 
     protected $fillable = [
         'user_id',

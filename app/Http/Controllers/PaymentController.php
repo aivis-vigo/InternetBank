@@ -82,6 +82,8 @@ class PaymentController extends Controller
         ]);
     }
 
+
+
     private function validateIban(string $iban)
     {
         $result = (new Api($_ENV['VALIDATE_IBAN']))->validateIBANBasic($iban);

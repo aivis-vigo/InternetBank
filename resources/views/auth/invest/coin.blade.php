@@ -28,18 +28,6 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col w-1/4 my-auto text-right">
-                <button
-                    type="button"
-                    class="inline-block rounded bg-green-500 hover:bg-green-400 active:bg-green-600 mb-2 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-success-600 focus:bg-success-600 focus:outline-none focus:ring-0 active:bg-success-700 dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)]">
-                    Buy
-                </button>
-                <button
-                    type="button"
-                    class="inline-block rounded bg-red-500 hover:bg-red-400 active:bg-red-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-black transition duration-150 ease-in-out hover:bg-danger-600 focus:bg-danger-600 focus:outline-none focus:ring-0 active:bg-danger-700 dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]">
-                    Sell
-                </button>
-            </div>
         </div>
 
         <hr class="h-px bg-gray-300 border-0 dark:bg-gray-700">
@@ -81,9 +69,16 @@
                 @switch( $volumeChange = $coin->quote->EUR->volume_change_24h)
                     @case($volumeChange < 0)
                         <div class="flex gap-x-1">
-                            <svg class="h-5 w-5 text-red-500" width="24" height="24" viewBox="0 0 24 24"
-                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                 stroke-linejoin="round">
+                            <svg
+                                class="h-5 w-5 text-red-500"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z"/>
                                 <circle cx="12" cy="12" r="9"/>
                                 <line x1="8" y1="12" x2="12" y2="16"/>
@@ -97,9 +92,16 @@
                         @break
                     @case($volumeChange > 0)
                         <div class="flex gap-x-1">
-                            <svg class="h-5 w-5 text-green-500" width="24" height="24" viewBox="0 0 24 24"
-                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                 stroke-linejoin="round">
+                            <svg
+                                class="h-5 w-5 text-green-500"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z"/>
                                 <circle cx="12" cy="12" r="9"/>
                                 <line x1="8" y1="12" x2="12" y2="16"/>
@@ -130,9 +132,16 @@
                     @switch($interval = $coin->quote->EUR->{'percent_change_' . $timeInterval})
                         @case($interval < 0)
                             <div class="flex gap-x-1">
-                                <svg class="h-5 w-5 text-red-500" width="24" height="24" viewBox="0 0 24 24"
-                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                     stroke-linejoin="round">
+                                <svg
+                                    class="h-5 w-5 text-red-500"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z"/>
                                     <circle cx="12" cy="12" r="9"/>
                                     <line x1="8" y1="12" x2="12" y2="16"/>
@@ -146,9 +155,15 @@
                             @break
                         @case($interval > 0)
                             <div class="flex gap-x-1">
-                                <svg class="h-5 w-5 text-green-500" width="24" height="24" viewBox="0 0 24 24"
-                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                     stroke-linejoin="round">
+                                <svg
+                                    class="h-5 w-5 text-green-500"
+                                    width="24" height="24"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z"/>
                                     <circle cx="12" cy="12" r="9"/>
                                     <line x1="12" y1="8" x2="8" y2="12"/>
@@ -170,6 +185,45 @@
         </div>
 
         <hr class="h-px bg-gray-300 border-0 dark:bg-gray-700">
+
+        <div class="my-3">
+            <form action="/test" method="post">
+                @csrf
+                <div class="mx-auto text-center my-2">
+                    <label
+                        for="amount"
+                        class="block text-sm font-medium text-gray-900 dark:text-white">
+                        Amount:
+                    </label>
+                    <div class="flex flex-col">
+                        <input
+                            name="amount"
+                            type="range"
+                            value="24"
+                            min="0.0001"
+                            max="{{ $rangeMax }}"
+                            step="0.0001"
+                            oninput="this.nextElementSibling.value = this.value"
+                            class="mx-auto w-1/2"
+                        >
+                        <output>
+                            {{ $rangeMax / 2 }}
+                        </output>
+                    </div>
+                </div>
+
+                <div class="mx-auto text-center">
+                    <button
+                        type="submit"
+                        class="w-1/2 text-white bg-green-500 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Buy
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <hr class="h-px bg-gray-300 border-0 dark:bg-gray-700">
+
 
         <div class="flex justify-between my-2">
             <div>
