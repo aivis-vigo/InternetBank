@@ -187,7 +187,7 @@
         <hr class="h-px bg-gray-300 border-0 dark:bg-gray-700">
 
         <div class="my-3">
-            <form action="/test" method="post">
+            <form action="/buy" method="post">
                 @csrf
                 <div class="mx-auto text-center my-2">
                     <label
@@ -211,6 +211,10 @@
                         </output>
                     </div>
                 </div>
+
+                <input type="hidden" name="symbol" value="{{ $coin->symbol }}">
+                <input type="hidden" name="name" value="{{ $coin->name }}">
+                <input type="hidden" name="price" value="{{ $coin->quote->EUR->price }}">
 
                 <div class="mx-auto text-center">
                     <button

@@ -57,5 +57,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [LogoutController::class, 'logout']);
 
     // Test
-    Route::post('/test', [CoinController::class, 'test']);
+    Route::post('/buy', [CoinController::class, 'buy']);
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Accounts;
 use App\Models\Card;
+use App\Models\Coin;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -62,7 +63,18 @@ class CoinController extends Controller
         ]);
     }
 
-    public function test() {
-        var_dump(request()->all());die;
+    public function buy()
+    {
+        $attributes = (object)request()->all();
+
+        Coin::create([
+            'account_id' => Auth::user()->getAuthIdentifier(),
+            'symbol' => $attributes->symbol,
+            'name' => $attributes->name,
+            'price' => $attributes->price,
+            'amount' => $attributes->amount,
+        ]);
+
+        return redirect('/invest');
     }
 }
