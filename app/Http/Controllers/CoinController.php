@@ -57,12 +57,4 @@ class CoinController extends Controller
             'percentChange' => ['1h', '24h', '7d', '30d', '60d', '90d']
         ]);
     }
-
-    public function validateIban(string $iban): string
-    {
-        $result = (new Api($_ENV['VALIDATE_IBAN']))->validateIBAN($iban);
-        $response = json_decode($result);
-
-        return $response->message;
-    }
 }

@@ -35,7 +35,7 @@
               </span>
             </span>
 
-            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="number"
+            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="number" step="0.01"
                    name="amount" placeholder="4.99" required/>
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
@@ -77,8 +77,11 @@
             @enderror
         </div>
 
-        <div class="w-full">
-            <hr class="h-1 mx-auto bg-white border-0 rounded md:my-4 dark:bg-gray-700">
+        <div class="inline-flex items-center justify-center w-full">
+            <hr class="w-full h-1 my-8 bg-white border-0 rounded dark:bg-gray-700">
+            <div class="absolute px-4 -translate-x-1/2 left-1/2 text-gray-400 bg-gray-100 dark:bg-gray-900">
+                Send To
+            </div>
         </div>
 
         <div class="w-full">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use IbanApi\Api;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -35,6 +36,11 @@ class PaymentController extends Controller
             $message = 'Invalid transaction!';
         } else {
             $amount = (int)($transactionRequest->amount * 100);
+
+            // Todo: convert with current exchange rate if different currencies
+            echo "<pre>";
+            var_dump($this->validateIban('ST74227883929725917485135')->data->currency_code);
+            echo "</pre>";
 
             DB::update('update bankAccounts set balance = balance - ? where IBAN = ?', [
                 $amount,
@@ -74,5 +80,13 @@ class PaymentController extends Controller
         return view('auth.payment.payment', [
             'message' => $message
         ]);
+    }
+
+    private function validateIban(string $iban)
+    {
+        $result = (new Api($_ENV['VALIDATE_IBAN']))->validateIBANBasic($iban);
+        $response = json_decode($result);
+
+        return $response;//$response->message;
     }
 }
