@@ -38,9 +38,6 @@ class PaymentController extends Controller
             $amount = (int)($transactionRequest->amount * 100);
 
             // Todo: convert with current exchange rate if different currencies
-            echo "<pre>";
-            var_dump($this->validateIban('ST74227883929725917485135')->data->currency_code);
-            echo "</pre>";
 
             DB::update('update bankAccounts set balance = balance - ? where IBAN = ?', [
                 $amount,
@@ -81,8 +78,6 @@ class PaymentController extends Controller
             'message' => $message
         ]);
     }
-
-
 
     private function validateIban(string $iban)
     {
