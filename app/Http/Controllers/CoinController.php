@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accounts;
-use App\Models\Card;
 use App\Models\Coin;
 use GuzzleHttp\Client;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Stripe\BankAccount;
 
 class CoinController extends Controller
 {
@@ -63,7 +62,7 @@ class CoinController extends Controller
         ]);
     }
 
-    public function buy()
+    public function buy(): RedirectResponse
     {
         $attributes = (object)request()->all();
 

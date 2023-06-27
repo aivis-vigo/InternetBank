@@ -10,8 +10,8 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<body class="bg-gray-100">
 
+<body class="bg-gray-100">
 <div class="flex flex-col min-h-screen justify-between">
     @section('navbar')
         <nav class="bg-white border-gray-200 dark:bg-gray-900">
