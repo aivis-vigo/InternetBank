@@ -54,10 +54,11 @@ class CoinController extends Controller
         foreach ($selectedCoin->data as $coin) {}
 
         $balance = Accounts::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
+        $range = number_format($balance / 100 / $coin->quote->EUR->price, 4);
 
         return view('auth.invest.coin', [
             'coin' => $coin,
-            'rangeMax' => number_format($balance / 100 / $coin->quote->EUR->price, 4),
+            'rangeMax' => str_replace(",", '', $range),
             'percentChange' => ['1h', '24h', '7d', '30d', '60d', '90d']
         ]);
     }
