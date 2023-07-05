@@ -73,12 +73,12 @@
         </div>
     </section>
 
-    @if (session()->exists('success'))
+    @if (session()->exists('message'))
         <div x-data="{ show: true }"
              x-init="setTimeout(() => show = false, 5000)"
              x-show="show"
              class="fixed bg-blue-500 text-white py-2 px-4 rounded-xl bottom-3 right-3 text-sm">
-            <p>{{ session('success') }}</p>
+            <p>{{ session('message') }}</p>
         </div>
     @endif
 @endsection

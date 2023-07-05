@@ -30,7 +30,7 @@
         <div class="w-full">
             <div class="flex gap-x-4">
                 <label class="relative w-full flex flex-col">
-                    <span class="font-bold mb-3">Name</span>
+                    <span class="font-bold mb-3">Receiver name</span>
                     <input
                         class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
                         type="text"
@@ -149,12 +149,23 @@
         @endif
 
         <div class="w-full">
-            <button type="submit"
-                    class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            <button
+                type="submit"
+                class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
                 Send
             </button>
         </div>
     </form>
+
+    @if (session()->exists('success'))
+        <div x-data="{ show: true }"
+             x-init="setTimeout(() => show = false, 5000)"
+             x-show="show"
+             class="fixed bg-blue-500 text-white py-2 px-4 rounded-xl bottom-3 right-3 text-sm">
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
 @endsection
 
 @section('footer')

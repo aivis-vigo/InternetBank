@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use Carbon\Carbon;
 use IbanApi\Api;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -18,15 +19,15 @@ class PaymentController extends Controller
 {
     public function index(): View
     {
+        // todo: optimize iban line
         return view('auth.payment.payment', [
             'name' => Auth::user()->name,
             'iban' => Account::query()->where('account_id', Auth::user()->id)->first('iban')->iban
         ]);
     }
 
-    public function validateTransaction(): View
+    public function validateTransaction(): RedirectResponse
     {
-        var_dump(request()->all());die;
         request()->validate(
             [
                 'name' => ['string', 'min:3', 'max:50', 'required'],
@@ -67,7 +68,7 @@ class PaymentController extends Controller
             );
 
             // Select users account
-            $userCards = DB::table('bankAccounts')->where('account_id', Auth::user()->getAuthIdentifier())->first('account_id');
+            $userCards = Auth::user()->id;
             // Receiver account
             $receiver = DB::table('bankAccounts')->where('IBAN', $transactionRequest->receiver_iban_number)->first('account_id');
 
@@ -77,7 +78,7 @@ class PaymentController extends Controller
                 [
                     // Initiator
                     [
-                        'account_id' => $userCards->account_id,
+                        'account_id' => $userCards,
                         'transaction_name' => $transactionRequest->receiver_name,
                         'transaction_amount' => -(int)($transactionRequest->amount * 100),
                         'created_at' => Carbon::now()->toDateTimeString()
@@ -92,21 +93,10 @@ class PaymentController extends Controller
                 ]
             );
 
+            // todo: display animated status message
             $message = 'Transaction successful!';
         }
 
-        return view(
-            'auth.payment.payment', [
-                'message' => $message
-            ]
-        );
-    }
-
-    private function validateIban(string $iban)
-    {
-        $result = (new Api($_ENV['VALIDATE_IBAN']))->validateIBANBasic($iban);
-        $response = json_decode($result);
-
-        return $response;//$response->message;
+        return redirect('/dashboard');
     }
 }

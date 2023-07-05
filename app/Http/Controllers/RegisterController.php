@@ -48,7 +48,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        // todo: generate unique or handle case
         Account::create(
             [
                 'account_id' => Auth::user()->getAuthIdentifier(),
