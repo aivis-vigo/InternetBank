@@ -61,6 +61,7 @@ Route::middleware('auth')->group(
         // Logout
         Route::get('/logout', [LogoutController::class, 'logout']);
 
+        // todo: remove when isn't needed
         // Test
         Route::post('/buy', [CoinController::class, 'buy']);
     }

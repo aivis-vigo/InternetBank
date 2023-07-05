@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Accounts;
+use App\Models\Account;
 use App\Models\Coin;
 use GuzzleHttp\Client;
 use Illuminate\Http\RedirectResponse;
@@ -76,7 +76,7 @@ class CoinController extends Controller
         foreach ($selectedCoin->data as $coin) {
         }
 
-        $balance = Accounts::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
+        $balance = Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
         $range = number_format($balance / 100 / $coin->quote->EUR->price, 4);
 
         return view(

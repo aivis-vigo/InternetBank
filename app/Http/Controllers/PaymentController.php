@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use Carbon\Carbon;
 use IbanApi\Api;
 use Illuminate\Support\Facades\Auth;
@@ -17,11 +18,15 @@ class PaymentController extends Controller
 {
     public function index(): View
     {
-        return view('auth.payment.payment');
+        return view('auth.payment.payment', [
+            'name' => Auth::user()->name,
+            'iban' => Account::query()->where('account_id', Auth::user()->id)->first('iban')->iban
+        ]);
     }
 
     public function validateTransaction(): View
     {
+        var_dump(request()->all());die;
         request()->validate(
             [
                 'name' => ['string', 'min:3', 'max:50', 'required'],
@@ -66,6 +71,7 @@ class PaymentController extends Controller
             // Receiver account
             $receiver = DB::table('bankAccounts')->where('IBAN', $transactionRequest->receiver_iban_number)->first('account_id');
 
+            // todo: DB replace with correct relationship
             // Register transaction info for account
             DB::table('accountHistory')->insert(
                 [
@@ -98,7 +104,6 @@ class PaymentController extends Controller
 
     private function validateIban(string $iban)
     {
-        // todo: get rid of comment
         $result = (new Api($_ENV['VALIDATE_IBAN']))->validateIBANBasic($iban);
         $response = json_decode($result);
 

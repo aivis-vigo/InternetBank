@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Accounts;
+use App\Models\Account;
 use App\Models\Coin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -21,7 +21,7 @@ class InvestmentController extends Controller
      */
     public function index(): View
     {
-        $account = Accounts::query()->where('account_id', Auth::user()->id)->get();
+        $account = Account::query()->where('account_id', Auth::user()->id)->get();
         $coins = Coin::query()->select('*')->where('account_id', Auth::user()->id)->get();
 
         return view(

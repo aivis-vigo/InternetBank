@@ -7,110 +7,125 @@
 @endsection
 
 @section('content')
-    <form class="flex flex-wrap gap-3 w-1/2  mx-auto p-5" action="/payment/validate" method="post">
+    <form
+        class="flex flex-wrap gap-3 w-1/2  mx-auto p-5"
+        action="/payment/validate"
+        method="post"
+    >
         @csrf
-        <label class="relative flex-1 flex flex-col">
-            <span class="font-bold mb-3">Name</span>
-            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="text"
-                   name="name" placeholder="John Doe" required/>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
-            </svg>
-        </label>
+        <input
+            class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
+            type="hidden"
+            name="name"
+            value="{{ $name }}"
+        />
 
-        <label class="relative flex-1 flex flex-col">
-            <span class="font-bold flex items-center gap-3 mb-3">
-              Amount
-              <span class="relative group">
-                <span
-                    class="hidden group-hover:flex justify-center items-center px-2 py-1 text-xs absolute -right-2 transform translate-x-full -translate-y-1/2 w-max top-1/2 bg-black text-white">Amount can't be negative!</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </span>
-            </span>
-
-            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="number" step="0.01"
-                   name="amount" placeholder="4.99" required/>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
-            </svg>
-        </label>
-
-        <label class="relative w-full flex flex-col">
-            <span class="font-bold mb-3">IBAN</span>
-            <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300" type="text"
-                   name="iban_number" placeholder="GR8401197845868294531954798" required/>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
-            </svg>
-        </label>
-
-        <div class="w-full flex flex-col">
-            @error('name')
-            <p class="text-red-500 text-xs mt-2">
-                {{ $message }}
-            </p>
-            @enderror
-
-            @error('amount')
-            <p class="text-red-500 text-xs mt-2">
-                {{ $message }}
-            </p>
-            @enderror
-
-            @error('iban_number')
-            <p class="text-red-500 text-xs mt-2">
-                {{ $message }}
-            </p>
-            @enderror
-        </div>
-
-        <div class="inline-flex items-center justify-center w-full">
-            <hr class="w-full h-1 my-8 bg-white border-0 rounded dark:bg-gray-700">
-            <div class="absolute px-4 -translate-x-1/2 left-1/2 text-gray-400 bg-gray-100 dark:bg-gray-900">
-                Send To
-            </div>
-        </div>
+        <input
+            class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
+            type="hidden"
+            name="iban_number"
+            value="{{ $iban }}"
+        />
 
         <div class="w-full">
             <div class="flex gap-x-4">
                 <label class="relative w-full flex flex-col">
                     <span class="font-bold mb-3">Name</span>
-                    <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
-                           type="text"
-                           name="receiver_name" placeholder="Jane Doe" required/>
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                    <input
+                        class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
+                        type="text"
+                        name="receiver_name"
+                        placeholder="Jane Doe"
+                        required
+                    />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                        />
                     </svg>
                 </label>
                 <label class="relative w-full flex flex-col">
                     <span class="font-bold mb-3">IBAN</span>
-                    <input class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
-                           type="text"
-                           name="receiver_iban_number" placeholder="IT64L0300203280562459785426" required/>
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
-                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                    <input
+                        class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
+                        type="text"
+                        name="receiver_iban_number"
+                        placeholder="IT64L0300203280562459785426"
+                        required
+                    />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
                     </svg>
                 </label>
             </div>
+
+            <label class="relative flex-1 flex flex-col">
+            <span class="font-bold flex items-center gap-3 my-3">
+              Amount
+              <span class="relative group">
+                <span
+                    class="hidden group-hover:flex justify-center items-center px-2 py-1 text-xs absolute -right-2 transform translate-x-full -translate-y-1/2 w-max top-1/2 bg-black text-white">
+                    Amount can't be negative!
+                </span>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                  <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </span>
+            </span>
+
+            <input
+                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300"
+                type="number"
+                step="0.01"
+                name="amount"
+                placeholder="4.99"
+                required
+            />
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute bottom-0 left-0 -mb-0.5 transform translate-x-1/2 -translate-y-1/2 text-black peer-placeholder-shown:text-gray-300 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                />
+            </svg>
+            </label>
         </div>
 
         <div class="w-full flex flex-col">
@@ -128,9 +143,9 @@
         </div>
 
         @if (!empty($message))
-        <div class="mx-auto">
-            {{$message}}
-        </div>
+            <div class="mx-auto">
+                {{$message}}
+            </div>
         @endif
 
         <div class="w-full">

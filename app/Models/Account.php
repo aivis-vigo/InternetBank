@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Accounts
+ * Class Account
  *
  * Represents the model for the 'bankAccounts' table.
  *
  * @package App\Models
  */
-class Accounts extends Model
+class Account extends Model
 {
     use HasFactory;
 

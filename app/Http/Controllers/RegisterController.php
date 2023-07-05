@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -36,10 +37,10 @@ class RegisterController extends Controller
     {
         $attributes = request()->validate(
             [
-            'name' => ['required', 'min:3', 'max:255'],
-            'email' => ['required', 'max:255', Rule::unique('users', 'email')],
-            'password' => ['required', 'min:7', 'max:255'],
-            'confirm-password' => ['required', 'min:7', 'max:255', 'required_with:password', 'same:password']
+                'name' => ['required', 'min:3', 'max:255'],
+                'email' => ['required', 'max:255', Rule::unique('users', 'email')],
+                'password' => ['required', 'min:7', 'max:255'],
+                'confirm-password' => ['required', 'min:7', 'max:255', 'required_with:password', 'same:password']
             ]
         );
 
@@ -47,6 +48,40 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Successfully created');
+        // todo: generate unique or handle case
+        Account::create(
+            [
+                'account_id' => Auth::user()->getAuthIdentifier(),
+                'balance' => 0,
+                'IBAN' => $this->generateNonRepeatingRandomNumber(),
+                'currency_code' => "EUR"
+            ]
+        );
+
+        return redirect('/dashboard')->with('success', 'Successfully created');
+    }
+
+    /**
+     * Generate a non-repeating random number.
+     *
+     * @return string
+     */
+    private function generateNonRepeatingRandomNumber(): string
+    {
+        $min = 10000000;
+        $max = 99999999;
+        $count = 1;
+
+        $numbers = range($min, $max);
+        $iban = 0;
+
+        for ($i = 0; $i < $count; $i++) {
+            $randomIndex = mt_rand(0, count($numbers) - 1);
+            $randomNumber = $numbers[$randomIndex];
+            array_splice($numbers, $randomIndex, 1);
+            $iban = $randomNumber;
+        }
+
+        return "LV09HABA05510" . $iban;
     }
 }
