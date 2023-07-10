@@ -43,11 +43,18 @@ Route::middleware('auth')->group(
         // Invest
         Route::get('/invest', [InvestmentController::class, 'index']);
         Route::get('/coins', [CoinController::class, 'index']);
-        Route::get(
-            '/coin/{id}', function (string $coinID) {
-                return (new CoinController())->show($coinID);
-            }
-        );
+        Route::get('/coin/{id}', function (string $coinID) {
+            return (new CoinController())->show($coinID);
+        });
+
+        // Buy/Sell coins
+        Route::post('/buy', [CoinController::class, 'buy']);
+        Route::post('/sell/{symbol}', function (string $coinSymbol) {
+            return (new CoinController())->sell($coinSymbol);
+        });
+        Route::post('/sell-all', function (string $coinSymbol) {
+            return (new CoinController())->sell($coinSymbol);
+        });
 
         // Settings
         Route::get('/settings', [UserController::class, 'show']);
@@ -60,9 +67,5 @@ Route::middleware('auth')->group(
 
         // Logout
         Route::get('/logout', [LogoutController::class, 'logout']);
-
-        // todo: remove when isn't needed
-        // Test
-        Route::post('/buy', [CoinController::class, 'buy']);
     }
 );

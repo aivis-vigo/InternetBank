@@ -52,7 +52,7 @@ class CoinController extends Controller
     /**
      * Show detailed information about a specific cryptocurrency.
      *
-     * @param  string $coinID
+     * @param string $coinID
      * @return View
      */
     public function show(string $coinID): View
@@ -116,5 +116,51 @@ class CoinController extends Controller
         );
 
         return redirect('/invest');
+    }
+
+    public function sell(string $symbol): RedirectResponse
+    {
+        $parameters = [
+            'symbol' => $symbol,
+            'convert' => 'EUR'
+        ];
+
+        $response = (new Client())->get(
+            'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest', [
+                'headers' => [
+                    'Accepts' => 'application/json',
+                    'X-CMC_PRO_API_KEY' => $_ENV['CRYPTO_API'],
+                ],
+                'query' => $parameters
+            ]
+        );
+
+        $selectedCoin = json_decode($response->getBody()->getContents());
+
+        foreach ($selectedCoin->data as $coin) {
+        }
+
+        $currentPrice = (int)$coin->quote->EUR->price;
+        $attributes = (object)request()->all();
+        $currentlySelling = Coin::query()->where('id', $attributes->id)->first()->amount;
+        Coin::query()->where('id', $attributes->id)->first()->update([
+            'amount' => $currentlySelling - $attributes->amount
+        ]);
+
+        $converted = intval($currentPrice * $attributes->amount) * 100;
+        $balance = Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
+
+        Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->update([
+            'balance' => $balance + $converted
+        ]);
+
+        $this->deleteEmpty();
+
+        return redirect('/invest');
+    }
+
+    private function deleteEmpty(): void
+    {
+        Coin::query()->where('amount', "<=", 0)->delete();
     }
 }
