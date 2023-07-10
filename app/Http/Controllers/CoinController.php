@@ -140,14 +140,17 @@ class CoinController extends Controller
         foreach ($selectedCoin->data as $coin) {
         }
 
-        $currentPrice = (int)$coin->quote->EUR->price;
+        $currentPrice = $coin->quote->EUR->price;
+        var_dump($currentPrice);
         $attributes = (object)request()->all();
         $currentlySelling = Coin::query()->where('id', $attributes->id)->first()->amount;
+
         Coin::query()->where('id', $attributes->id)->first()->update([
             'amount' => $currentlySelling - $attributes->amount
         ]);
 
         $converted = intval($currentPrice * $attributes->amount) * 100;
+
         $balance = Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
 
         Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->update([
