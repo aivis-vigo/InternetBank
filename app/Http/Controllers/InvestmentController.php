@@ -53,6 +53,7 @@ class InvestmentController extends Controller
 
     private function currencyRate(): object
     {
+        // todo: add job
         $date = str_replace('-', '', Carbon::now()->toDateString());
 
         $parameters = [
