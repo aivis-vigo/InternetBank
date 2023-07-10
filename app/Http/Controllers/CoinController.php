@@ -7,6 +7,7 @@ use App\Models\Coin;
 use GuzzleHttp\Client;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 /**
@@ -96,6 +97,13 @@ class CoinController extends Controller
     public function buy(): RedirectResponse
     {
         $attributes = (object)request()->all();
+
+        $transactionPrice = $attributes->amount * $attributes->price;
+        $balance = Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
+
+        Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->update([
+            'balance' => $balance - ($transactionPrice * 100)
+        ]);
 
         Coin::create(
             [
