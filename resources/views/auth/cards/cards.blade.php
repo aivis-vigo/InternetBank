@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="mx-auto mt-6">
+    <div class="mx-auto mt-6 dark:text-white">
         @forelse($cards as $card)
             <div class="mb-6 w-1/2">
                 <div
@@ -36,7 +36,7 @@
                                     <p class="font-light text-xs text-xs">
                                         Expiry
                                     <p class="font-medium tracking-wider text-sm">
-                                        {{ $card->expires_at }}
+                                        {{ $card->expire_date }}
                                     </p>
                                 </div>
 
@@ -44,7 +44,7 @@
                                     <p class="font-light text-xs">
                                         CVV
                                     <p class="font-bold tracking-more-wider text-sm">
-                                        {{ $card->cvc }}
+                                        {{ $card->card_cvc }}
                                     </p>
                                 </div>
                             </div>

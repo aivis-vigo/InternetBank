@@ -63,7 +63,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::twoFactorChallengeView(function () {
-            return view('auth.two-factor-challenge');
+            return view('auth.login.two-factor-challenge');
         });
 
         Fortify::verifyEmailView(function () {

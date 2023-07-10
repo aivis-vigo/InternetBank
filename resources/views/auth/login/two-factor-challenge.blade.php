@@ -14,7 +14,7 @@
             class="w-1/2 p-4"
         >
             @csrf
-            <div class="bg-white rounded-lg p-4">
+            <div class="bg-white rounded-lg p-4 dark:bg-gray-900 border-2">
                 <label
                     for="code"
                     class="block mb-2 text-sm font-medium text-black dark:text-white"

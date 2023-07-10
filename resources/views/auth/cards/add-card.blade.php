@@ -16,7 +16,7 @@
         <label class="relative w-full flex flex-col">
             <span class="font-bold mb-3">Card number</span>
             <input
-                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 bg-gray-900"
+                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 dark:bg-gray-900"
                 type="text"
                 name="card_number"
                 placeholder="0000 0000 0000 0000"
@@ -41,7 +41,7 @@
         <label class="relative flex-1 flex flex-col">
             <span class="font-bold mb-3">Expire date</span>
             <input
-                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 bg-gray-900"
+                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 dark:bg-gray-900"
                 type="text"
                 name="expire_date"
                 placeholder="MM/YY"
@@ -88,7 +88,7 @@
             </span>
 
             <input
-                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 bg-gray-900"
+                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 dark:bg-gray-900"
                 type="text"
                 name="card_cvc" placeholder="&bull;&bull;&bull;"
                 required

@@ -32,7 +32,7 @@
                 <label class="relative w-full flex flex-col">
                     <span class="font-bold mb-3">Receiver name</span>
                     <input
-                        class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 bg-gray-900"
+                        class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 dark:bg-gray-900"
                         type="text"
                         name="receiver_name"
                         placeholder="Jane Doe"
@@ -56,7 +56,7 @@
                 <label class="relative w-full flex flex-col">
                     <span class="font-bold mb-3">IBAN</span>
                     <input
-                        class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 bg-gray-900"
+                        class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 dark:bg-gray-900"
                         type="text"
                         name="receiver_iban_number"
                         placeholder="IT64L0300203280562459785426"
@@ -104,7 +104,7 @@
             </span>
 
             <input
-                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 bg-gray-900"
+                class="rounded-md peer pl-12 pr-2 py-2 border-2 border-gray-200 placeholder-gray-300 dark:bg-gray-900"
                 type="number"
                 step="0.01"
                 name="amount"

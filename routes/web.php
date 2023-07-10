@@ -39,6 +39,7 @@ Route::middleware('auth')->group(
 
         // Cards
         Route::get('/cards', [CardController::class, 'index']);
+        Route::post('/add-card', [CardController::class, 'save']);
 
         // Invest
         Route::get('/invest', [InvestmentController::class, 'index']);
@@ -59,7 +60,6 @@ Route::middleware('auth')->group(
         // Settings
         Route::get('/settings', [UserController::class, 'show']);
         Route::get('/add-card', [CardController::class, 'add']);
-        Route::post('/add-card', [CardController::class, 'save']);
 
         // Profile
         Route::get('/profile/edit', [UserController::class, 'editUserInfo']);

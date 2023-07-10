@@ -35,8 +35,8 @@ class CardController extends Controller
         Card::create([
             'user_id' => Auth::user()->getAuthIdentifier(),
             'card_number' => $attributes['card_number'],
-            'expires_at' => $attributes['expire_date'],
-            'cvc' => $attributes['card_cvc']
+            'expire_date' => $attributes['expire_date'],
+            'card_cvc' => (int)$attributes['card_cvc']
         ]);
 
         return redirect('/cards');

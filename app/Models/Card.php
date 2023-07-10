@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use mysql_xdevapi\Table;
 
 /**
  * Class Card
@@ -24,6 +25,8 @@ class Card extends Model
      */
     public $timestamps = false;
 
+    protected $table = 'card';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -32,8 +35,8 @@ class Card extends Model
     protected $fillable = [
         'user_id',
         'card_number',
-        'expires_at',
-        'cvc'
+        'expire_date',
+        'card_cvc'
     ];
 
     /**
