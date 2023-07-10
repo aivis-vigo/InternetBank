@@ -17,7 +17,7 @@
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-gray-800">
 <div class="flex flex-col min-h-screen justify-between">
     @section('navbar')
         <nav class="bg-white border-gray-200 dark:bg-gray-900">

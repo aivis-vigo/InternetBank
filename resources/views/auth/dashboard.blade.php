@@ -11,11 +11,11 @@
         <div class="w-1/2 mx-auto my-4">
             <div class="flex flex-wrap">
                 <div class="w-full flex space-x-4">
-                    <div class="w-full md:w-1/2 bg-white mb-4 p-4 border-2 rounded-lg border-gray-300">
+                    <div class="w-full md:w-1/2 bg-white mb-4 p-4 border-2 rounded-lg border-gray-300 dark:bg-gray-900">
                         <button
                             id="cardNumberDropdown"
                             data-dropdown-toggle="cardNumber"
-                            class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                            class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                             {{$accounts->IBAN}}
                             <svg
                                 class="w-5 h-5 ml-1"
@@ -52,7 +52,7 @@
                                 @empty
                                     <li>
                                         <a href="#"
-                                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:text-white">
                                             You don't have any other accounts!
                                         </a>
                                     </li>
@@ -62,7 +62,7 @@
 
 
                     </div>
-                    <div class="w-full md:w-1/2 bg-white mb-4 p-4 border-2 rounded-lg border-gray-300">
+                    <div class="w-full md:w-1/2 bg-white mb-4 p-4 border-2 rounded-lg border-gray-300 dark:bg-gray-900 dark:text-white">
                         @if($accounts->balance != null)
                             &euro; {{number_format($accounts->balance / 100, 2)}}
                         @else
@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
-                <div class="w-full md:w-full md:h-full bg-white p-4 border-2 rounded-lg border-gray-300">
+                <div class="w-full md:w-full md:h-full bg-white p-4 border-2 rounded-lg border-gray-300 dark:bg-gray-900 dark:text-white">
                     @forelse($history as $transaction)
                         <div class="flex-col">
                             <div class="flex justify-between my-2 rounded-lg">

@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="mx-auto flex-col w-1/2 p-4 border-2 border-gray-300 rounded-lg bg-white">
+    <div class="mx-auto flex-col w-1/2 p-4 border-2 border-gray-300 rounded-lg bg-white dark:text-white dark:bg-gray-900">
         <div class="flex w-full justify-between">
             <div class="flex">
                 <div>

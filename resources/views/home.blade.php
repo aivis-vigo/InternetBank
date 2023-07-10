@@ -16,12 +16,12 @@
                 Internet Bank
             </div>
             <div class="text-white text-3xl font-bold">
-                + Crypto included
+                + Crypto
             </div>
         </div>
     </div>
 
-    <div class="grid h-full w-full bg-gray-100 text-black">
+    <div class="grid h-full w-full bg-gray-100 text-black dark:bg-gray-800 dark:text-white">
         <p class="sm:w-1/2 text-justify p-6 mx-auto">
             Welcome to CryptoBank, your premier destination for
             secure online banking and cryptocurrency
@@ -40,20 +40,6 @@
             Bitcoin (BTC), Ethereum (ETH), and Litecoin (LTC) to promising newcomers, our comprehensive selection allows
             you to diversify your portfolio and explore exciting investment opportunities. Take advantage of our
             real-time market data and advanced trading features to make informed investment decisions.<br><br>
-
-            We understand the importance of security in the digital world. That's why we have implemented
-            state-of-the-art encryption protocols and multi-factor authentication to safeguard your personal and
-            financial information. Our team of cybersecurity experts continuously monitors our systems to ensure that
-            your data remains protected at all times.<br><br>
-
-            At CryptoBank, we believe in empowering our customers with the knowledge they need to succeed. Our
-            educational resources provide valuable insights into the world of cryptocurrencies and blockchain
-            technology. Stay up-to-date with the latest trends, news, and analysis to maximize your potential in the
-            ever-evolving digital landscape.<br><br>
-
-            Join CryptoBank today and embark on a secure and rewarding banking journey. Experience the convenience,
-            flexibility, and potential of traditional and digital finance combined in one comprehensive platform. Your
-            financial future starts here with CryptoBank, your trusted partner in banking and cryptocurrencies.<br><br>
         </p>
     </div>
 
