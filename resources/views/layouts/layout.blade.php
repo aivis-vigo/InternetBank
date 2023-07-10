@@ -59,12 +59,13 @@
                         </path>
                     </svg>
                 </button>
+
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         @auth()
                             <li>
                                 <a href="/dashboard"
-                                   class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 dark:text-white md:dark:text-blue-500"
+                                   class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 md:dark:text-white"
                                    aria-current="page">
                                     Dashboard
                                 </a>
@@ -72,9 +73,9 @@
                             <li>
                                 <button id="paymentDropdownLink"
                                         data-dropdown-toggle="paymentDropdown"
-                                        class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                                        class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                 >
-                                    Payment
+                                    Payments
                                     <svg
                                         class="w-5 h-5 ml-1"
                                         aria-hidden="true"
@@ -101,7 +102,7 @@
                                         <li>
                                             <a
                                                 href="/payment"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-100"
                                             >New / local payment
                                             </a>
                                         </li>
@@ -111,7 +112,7 @@
                                 <button
                                     id="cardDropdownLink"
                                     data-dropdown-toggle="cardDropdown"
-                                    class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                                    class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                 >
                                     Cards
                                     <svg
@@ -134,7 +135,7 @@
                                     class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                                 >
                                     <ul
-                                        class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                        class="py-2 text-sm text-gray-700 dark:text-white"
                                         aria-labelledby="dropdownLargeButton"
                                     >
                                         <li>
@@ -159,7 +160,7 @@
                                 <button
                                     id="investDropdownLink"
                                     data-dropdown-toggle="investDropdown"
-                                    class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                                    class="flex items-center justify-between w-full py-2 pl-3 pr-4  text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                                 >
                                     Invest
                                     <svg
@@ -206,7 +207,7 @@
                             <li>
                                 <a
                                     href="/settings"
-                                    class="block py-2 pl-3 pr-4 text-red bg-red-500 rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 dark:text-red md:dark:text-red-500"
+                                    class="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:text-black md:hover:text-blue-500 md:p-0 dark:text-white md:dark:text-white"
                                     aria-current="page"
                                 >
                                     Settings
@@ -261,7 +262,7 @@
                             I-Bank
                         </span>
                     </a>
-                    <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-black sm:mb-0 dark:text-gray-400">
+                    <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-black sm:mb-0 dark:text-white">
                         <li>
                             <a href="#" class="mr-4 hover:underline hover:text-blue-500 md:mr-6 ">About</a>
                         </li>
