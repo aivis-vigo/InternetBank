@@ -20,6 +20,7 @@ class DashboardController extends Controller
          *
          * @return View
          */
+
         $transactions = [];
 
         $account = DB::table('bankAccounts')->where('account_id', Auth::user()->id)->first();

@@ -28,6 +28,8 @@ Route::middleware('guest')->group(
     }
 );
 
+// todo: group middlewares
+
 Route::middleware('auth')->group(
     function () {
         // Dashboard
@@ -42,11 +44,8 @@ Route::middleware('auth')->group(
         Route::post('/add-card', [CardController::class, 'save']);
 
         // Invest
-        Route::get('/invest', [InvestmentController::class, 'index']);
-        Route::get('/coins', [CoinController::class, 'index']);
-        Route::get('/coin/{id}', function (string $coinID) {
-            return (new CoinController())->show($coinID);
-        });
+        Route::get('/customize-investment-account', [InvestmentController::class, 'customizeAccount']);
+        Route::post('/create-investment-account', [InvestmentController::class, 'create']);
 
         // Buy/Sell coins
         Route::post('/buy', [CoinController::class, 'buy']);
@@ -67,5 +66,16 @@ Route::middleware('auth')->group(
 
         // Logout
         Route::get('/logout', [LogoutController::class, 'logout']);
+    }
+);
+
+Route::middleware('invest')->group(
+    function () {
+        // Users with investment accounts
+        Route::get('/invest', [InvestmentController::class, 'index']);
+        Route::get('/coins', [CoinController::class, 'index']);
+        Route::get('/coin/{id}', function (string $coinID) {
+            return (new CoinController())->show($coinID);
+        });
     }
 );

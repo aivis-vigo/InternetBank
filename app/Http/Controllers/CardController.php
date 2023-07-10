@@ -27,6 +27,7 @@ class CardController extends Controller
     public function save(): RedirectResponse
     {
         request()->all();
+
         $attributes = request()->validate([
             'card_number' => ['string', 'min:16', 'max:16', 'required'],
             'expire_date' => ['string', 'min:5', 'max:5', 'required'],

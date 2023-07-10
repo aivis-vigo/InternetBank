@@ -140,6 +140,8 @@ class CoinController extends Controller
         foreach ($selectedCoin->data as $coin) {
         }
 
+        // todo: clean up code
+
         $currentPrice = $coin->quote->EUR->price;
         var_dump($currentPrice);
         $attributes = (object)request()->all();

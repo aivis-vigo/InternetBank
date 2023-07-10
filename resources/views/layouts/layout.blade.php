@@ -102,7 +102,7 @@
                                         <li>
                                             <a
                                                 href="/payment"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-100"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-100 dark:text-white"
                                             >New / local payment
                                             </a>
                                         </li>
@@ -183,9 +183,18 @@
                                     class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                                 >
                                     <ul
-                                        class="py-2 text-sm text-gray-700 dark:text-gray-400"
+                                        class="py-2 text-sm text-gray-700 dark:text-white"
                                         aria-labelledby="dropdownLargeButton"
                                     >
+                                        <li>
+                                            <a
+                                                href="/customize-investment-account"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                            >
+                                                Create account
+                                            </a>
+                                        </li>
+                                        @invest()
                                         <li>
                                             <a
                                                 href="/coins"
@@ -202,6 +211,7 @@
                                                 Balance
                                             </a>
                                         </li>
+                                        @endinvest
                                 </div>
                             </li>
                             <li>
