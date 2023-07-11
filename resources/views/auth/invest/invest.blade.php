@@ -12,7 +12,7 @@
             <div class="flex gap-x-4">
                 <div
                     class="w-full border-2 bg-white border-gray-300 rounded-lg p-4 mb-4 dark:bg-gray-900 dark:text-white">
-                    {{ $account->IBAN }}
+                    {{ $account->iban }}
                 </div>
                 <div
                     class="w-full border-2 bg-white border-gray-300 rounded-lg p-4 mb-4 dark:bg-gray-900 dark:text-white">

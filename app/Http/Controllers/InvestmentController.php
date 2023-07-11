@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Coin;
+use App\Models\InvestmentAccount;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\RedirectResponse;
@@ -25,8 +26,9 @@ class InvestmentController extends Controller
     public function index(): View
     {
         // todo: change iban to investment iban
+        // todo: sell all
 
-        $account = Account::query()->where('account_id', Auth::user()->id)->get();
+        $account = InvestmentAccount::query()->where('user_id', Auth::user()->id)->get();
         $coins = Coin::query()->select('*')->where('account_id', Auth::user()->id)->get();
 
         return view(
@@ -46,9 +48,18 @@ class InvestmentController extends Controller
         ]);
     }
 
-    public function create(): View
+    public function create(): RedirectResponse
     {
-        var_dump(request()->all());die;
+        $attributes = (object)request()->all();
+
+        InvestmentAccount::create([
+           'user_id' => Auth::user()->getAuthIdentifier(),
+           'balance' => 0,
+            'iban' => $this->generateNonRepeatingRandomNumber($attributes->code),
+            'currency_code' => $attributes->code
+        ]);
+
+        return redirect('/invest');
     }
 
     private function currencyRate(): object
@@ -72,5 +83,24 @@ class InvestmentController extends Controller
         $currenciesXml = simplexml_load_string($response->getBody()->getContents());
 
         return json_decode(json_encode($currenciesXml));
+    }
+
+    private function generateNonRepeatingRandomNumber($currencyCode): string
+    {
+        $min = 10000000;
+        $max = 99999999;
+        $count = 1;
+
+        $numbers = range($min, $max);
+        $iban = 0;
+
+        for ($i = 0; $i < $count; $i++) {
+            $randomIndex = mt_rand(0, count($numbers) - 1);
+            $randomNumber = $numbers[$randomIndex];
+            array_splice($numbers, $randomIndex, 1);
+            $iban = $randomNumber;
+        }
+
+        return $currencyCode . "4625579723" . $iban;
     }
 }

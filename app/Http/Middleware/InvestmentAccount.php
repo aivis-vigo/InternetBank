@@ -20,7 +20,7 @@ class InvestmentAccount
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->input('token') !== 'my-secret-token') {
-            return redirect('/investment');
+            return redirect('/dashboard');
         }
 
         return $next($request);

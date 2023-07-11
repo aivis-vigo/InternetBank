@@ -9,6 +9,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\InvestmentAccount;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -46,6 +47,11 @@ Route::middleware('auth')->group(
         // Invest
         Route::get('/customize-investment-account', [InvestmentController::class, 'customizeAccount']);
         Route::post('/create-investment-account', [InvestmentController::class, 'create']);
+        Route::get('/invest', [InvestmentController::class, 'index'])->middleware('invest');
+        Route::get('/coins', [CoinController::class, 'index'])->middleware('invest');
+        Route::get('/coin/{id}', function (string $coinID) {
+            return (new CoinController())->show($coinID);
+        })->middleware('invest');
 
         // Buy/Sell coins
         Route::post('/buy', [CoinController::class, 'buy']);
@@ -69,6 +75,7 @@ Route::middleware('auth')->group(
     }
 );
 
+/**
 Route::middleware('invest')->group(
     function () {
         // Users with investment accounts
@@ -79,3 +86,4 @@ Route::middleware('invest')->group(
         });
     }
 );
+**/
