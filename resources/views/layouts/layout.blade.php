@@ -27,7 +27,7 @@
                     class="flex items-center">
                     <img
                         src="logo.png"
-                        class="h-8 mr-3"
+                        class="h-8 mr-3 rounded-lg"
                         alt="I-Bank Logo"
                     />
                     <span
@@ -269,7 +269,11 @@
                         href="/"
                         class="flex items-center mb-4 sm:mb-0"
                     >
-                        <img src="logo.png" class="h-8 mr-3" alt="I-Bank Logo"/>
+                        <img
+                            src="logo.png"
+                            class="h-8 mr-3 rounded-lg"
+                            alt="I-Bank Logo"
+                        />
                         <span class="self-center text-black text-2xl font-semibold whitespace-nowrap dark:text-white">
                             I-Bank
                         </span>

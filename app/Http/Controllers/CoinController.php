@@ -78,7 +78,9 @@ class CoinController extends Controller
         foreach ($selectedCoin->data as $coin) {
         }
 
-        $account = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first();
+        $account = InvestmentAccount::query()
+            ->where('user_id', Auth::user()->getAuthIdentifier())
+            ->first();
         $balance = $account->balance * $account->rate;
         $range = number_format($balance / 100 / ($coin->quote->EUR->price * $account->rate), 4);
 
@@ -102,22 +104,36 @@ class CoinController extends Controller
         $attributes = (object)request()->all();
 
         $transactionPrice = $attributes->amount * $attributes->price;
-        $account = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first();
+        $account = InvestmentAccount::query()
+            ->where('user_id', Auth::user()->getAuthIdentifier())
+            ->first();
         $balance = $account->balance * $account->rate;
 
-        InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first()->update([
-            'balance' => intval(($balance - intval(($transactionPrice * $account->rate) * 100)) / 100)
-        ]);
+        InvestmentAccount::query()
+            ->where('user_id', Auth::user()->getAuthIdentifier())
+            ->first()
+            ->update(
+                [
+                    'balance' => intval(($balance - intval(($transactionPrice * $account->rate) * 100)) / 100)
+                ]
+            );
 
-        Coin::create(
-            [
-                'account_id' => Auth::user()->getAuthIdentifier(),
-                'symbol' => $attributes->symbol,
-                'name' => $attributes->name,
-                'price' => $attributes->price,
-                'amount' => $attributes->amount,
-            ]
-        );
+        if (Coin::query()->where('account_id', Auth::user()->getAuthIdentifier())->where('symbol', $attributes->symbol)->count() > 0) {
+            Coin::query()
+                ->where('account_id', Auth::user()->getAuthIdentifier())
+                ->where('symbol', $attributes->symbol)
+                ->increment('amount', (float)$attributes->amount);
+        } else {
+            Coin::create(
+                [
+                    'account_id' => Auth::user()->getAuthIdentifier(),
+                    'symbol' => $attributes->symbol,
+                    'name' => $attributes->name,
+                    'price' => $attributes->price,
+                    'amount' => $attributes->amount,
+                ]
+            );
+        }
 
         return redirect('/invest');
     }
@@ -125,7 +141,9 @@ class CoinController extends Controller
     public function sell(string $symbol): RedirectResponse
     {
         $attributes = (object)request()->all();
-        $account = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first();
+        $account = InvestmentAccount::query()
+            ->where('user_id', Auth::user()->getAuthIdentifier())
+            ->first();
 
         $parameters = [
             'symbol' => $symbol,
@@ -152,16 +170,27 @@ class CoinController extends Controller
         $currentPrice = $coin->quote->EUR->price * $account->rate;
         $currentlySelling = Coin::query()->where('id', $attributes->id)->first()->amount;
 
-        Coin::query()->where('id', $attributes->id)->first()->update([
-            'amount' => $currentlySelling - $attributes->amount
-        ]);
+        Coin::query()
+            ->where('id', $attributes->id)->first()
+            ->update(
+                [
+                    'amount' => $currentlySelling - $attributes->amount
+                ]
+            );
 
         $converted = intval($currentPrice * $attributes->amount);
-        $balance = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first()->balance * $account->rate;
+        $balance = InvestmentAccount::query()
+                ->where('user_id', Auth::user()->getAuthIdentifier())
+                ->first()->balance * $account->rate;
 
-        InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first()->update([
-            'balance' => intval($balance + intval($converted * 100)) / $account->rate
-        ]);
+        InvestmentAccount::query()
+            ->where('user_id', Auth::user()->getAuthIdentifier())
+            ->first()
+            ->update(
+                [
+                    'balance' => intval($balance + intval($converted * 100)) / $account->rate
+                ]
+            );
 
         $this->deleteEmpty();
 
@@ -170,6 +199,8 @@ class CoinController extends Controller
 
     private function deleteEmpty(): void
     {
-        Coin::query()->where('amount', "<=", 0)->delete();
+        Coin::query()
+            ->where('amount', "<=", 0)
+            ->delete();
     }
 }
