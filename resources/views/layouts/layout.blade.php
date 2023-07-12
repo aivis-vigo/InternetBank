@@ -194,7 +194,8 @@
                                                 Create account
                                             </a>
                                         </li>
-                                        @invest()
+
+                                    @can('invest')
                                         <li>
                                             <a
                                                 href="/coins"
@@ -211,7 +212,8 @@
                                                 Balance
                                             </a>
                                         </li>
-                                        @endinvest
+                                        @else
+                                    @endcan
                                 </div>
                             </li>
                             <li>

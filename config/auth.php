@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'invest' => [
+            'driver' => 'session',
+            'provider' => 'invests',
+        ]
     ],
 
     /*
@@ -64,6 +69,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+
+        'invests' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\InvestmentAccount::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

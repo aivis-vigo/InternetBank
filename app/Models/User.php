@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -61,5 +62,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function cards(): HasMany
     {
         return $this->hasMany(Card::class);
+    }
+
+    /**
+     * Determine if the user has an investment account.
+     *
+     * @return bool
+     */
+    public function hasInvestmentAccount(): bool
+    {
+        return InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->exists();
     }
 }

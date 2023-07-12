@@ -23,11 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::directive('invest', function () {
-            $accounts = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->count();
-            if ($accounts > 0) {
-                return 'aaaa';
-            }
+        Blade::directive('test', function ($expression) {
+            return $expression . "test";
         });
 
         Cashier::calculateTaxes();

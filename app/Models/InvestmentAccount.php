@@ -9,12 +9,15 @@ class InvestmentAccount extends Model
 {
     use HasFactory;
 
+    protected $guard = 'invest';
+
     protected $table = 'investmentAccounts';
 
     protected $fillable = [
         'user_id',
         'balance',
         'iban',
-        'currency_code'
+        'currency_code',
+        'rate'
     ];
 }

@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="mx-auto w-full md:w-1/2 bg-white mb-4 p-4 border-2 rounded-lg border-gray-300 dark:bg-gray-900">
-        <h1 class="text-center text-white text-2xl">
+        <h1 class="text-center dark:text-white text-2xl">
             Investment Account
         </h1>
 

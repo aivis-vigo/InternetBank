@@ -23,7 +23,7 @@
                         <div>
                             <label
                                 for="name"
-                            ="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
                                 Your name
                             </label>

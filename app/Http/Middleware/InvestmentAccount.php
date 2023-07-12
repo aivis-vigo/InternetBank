@@ -19,10 +19,15 @@ class InvestmentAccount
 
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->input('token') !== 'my-secret-token') {
-            return redirect('/dashboard');
+        if (auth()->check() && $this->hasInvestmentAccount()) {
+            return $next($request);
         }
 
-        return $next($request);
+        abort(403, 'Unauthorized');
+    }
+
+    private function hasInvestmentAccount(): bool
+    {
+        return \App\Models\InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->exists();
     }
 }

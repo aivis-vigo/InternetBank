@@ -25,8 +25,8 @@ class InvestmentController extends Controller
      */
     public function index(): View
     {
-        // todo: change iban to investment iban
         // todo: sell all
+        // todo: in case of many account select one
 
         $account = InvestmentAccount::query()->where('user_id', Auth::user()->id)->get();
         $coins = Coin::query()->select('*')->where('account_id', Auth::user()->id)->get();
@@ -41,8 +41,6 @@ class InvestmentController extends Controller
 
     public function customizeAccount(): View
     {
-        // todo: chose currency and create account with unique iban (it can be international)
-
         return view('auth.invest.create', [
             'currencies' => $this->currencyRate()->Currencies->Currency
         ]);
@@ -53,10 +51,11 @@ class InvestmentController extends Controller
         $attributes = (object)request()->all();
 
         InvestmentAccount::create([
-           'user_id' => Auth::user()->getAuthIdentifier(),
-           'balance' => 0,
+            'user_id' => Auth::user()->getAuthIdentifier(),
+            'balance' => 0,
             'iban' => $this->generateNonRepeatingRandomNumber($attributes->code),
-            'currency_code' => $attributes->code
+            'currency_code' => $attributes->code,
+            'rate' => intval($attributes->rate * 100)
         ]);
 
         return redirect('/invest');

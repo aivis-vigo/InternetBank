@@ -16,7 +16,7 @@
                 </div>
                 <div
                     class="w-full border-2 bg-white border-gray-300 rounded-lg p-4 mb-4 dark:bg-gray-900 dark:text-white">
-                    &euro; {{ $account->balance / 100 }}
+                    {{ $account->currency_code }} {{ number_format($account->rate * $account->balance / 10000, 2) }}
                 </div>
             </div>
             <div class="border-2 bg-white border-gray-300 rounded-lg p-4 dark:text-white dark:bg-gray-900">
@@ -58,6 +58,25 @@
                                 Sell
                             </button>
                         </div>
+                    </form>
+
+                    <form
+                        action="/sell/{{ $coin->symbol }}"
+                        method="post"
+                        class="flex my-2 p-4 bg-gray-200 hover:bg-gray-300 rounded-lg dark:bg-gray-800 dark:hover:text-black"
+                    >
+                        @csrf
+
+                        <input type="hidden" name="id" value="{{ $coin->id }}">
+                        <input type="hidden" name="name" value="{{ $coin->name }}">
+                        <input type="hidden" name="price" value="{{ $coin->price }}">
+                        <input type="hidden" name="amount" value="{{ $coin->amount }}">
+
+                        <button
+                            type="submit"
+                            class="text-red-500 dark:hover:text-black">
+                            Sell All
+                        </button>
                     </form>
                 @empty
                     Nothing to show

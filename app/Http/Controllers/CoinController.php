@@ -78,8 +78,9 @@ class CoinController extends Controller
         foreach ($selectedCoin->data as $coin) {
         }
 
-        $balance = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first()->balance;
-        $range = number_format($balance / 100 / $coin->quote->EUR->price, 4);
+        $account = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first();
+        $balance = $account->balance * $account->rate;
+        $range = number_format($balance / 100 / ($coin->quote->EUR->price * $account->rate), 4);
 
         return view(
             'auth.invest.coin', [
@@ -97,13 +98,15 @@ class CoinController extends Controller
      */
     public function buy(): RedirectResponse
     {
+        // todo: if coin exist add not create new
         $attributes = (object)request()->all();
 
         $transactionPrice = $attributes->amount * $attributes->price;
-        $balance = Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
+        $account = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first();
+        $balance = $account->balance * $account->rate;
 
-        Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->update([
-            'balance' => $balance - ($transactionPrice * 100)
+        InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first()->update([
+            'balance' => intval(($balance - intval(($transactionPrice * $account->rate) * 100)) / 100)
         ]);
 
         Coin::create(
@@ -121,6 +124,9 @@ class CoinController extends Controller
 
     public function sell(string $symbol): RedirectResponse
     {
+        $attributes = (object)request()->all();
+        $account = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first();
+
         $parameters = [
             'symbol' => $symbol,
             'convert' => 'EUR'
@@ -141,23 +147,20 @@ class CoinController extends Controller
         foreach ($selectedCoin->data as $coin) {
         }
 
-        // todo: clean up code
-
-        $currentPrice = $coin->quote->EUR->price;
-        var_dump($currentPrice);
-        $attributes = (object)request()->all();
+        // todo: clean up
+        // todo: fix price bugs
+        $currentPrice = $coin->quote->EUR->price * $account->rate;
         $currentlySelling = Coin::query()->where('id', $attributes->id)->first()->amount;
 
         Coin::query()->where('id', $attributes->id)->first()->update([
             'amount' => $currentlySelling - $attributes->amount
         ]);
 
-        $converted = intval($currentPrice * $attributes->amount) * 100;
+        $converted = intval($currentPrice * $attributes->amount);
+        $balance = InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first()->balance * $account->rate;
 
-        $balance = Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->balance;
-
-        Account::query()->where('account_id', Auth::user()->getAuthIdentifier())->first()->update([
-            'balance' => $balance + $converted
+        InvestmentAccount::query()->where('user_id', Auth::user()->getAuthIdentifier())->first()->update([
+            'balance' => intval($balance + intval($converted * 100)) / $account->rate
         ]);
 
         $this->deleteEmpty();
