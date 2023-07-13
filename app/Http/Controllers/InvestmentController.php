@@ -28,12 +28,12 @@ class InvestmentController extends Controller
         // todo: sell all
         // todo: in case of many account select one
 
-        $account = InvestmentAccount::query()->where('user_id', Auth::user()->id)->get();
         $coins = Coin::query()->select('*')->where('account_id', Auth::user()->id)->get();
 
         return view(
             'auth.invest.invest', [
-                'account' => $account[0],
+                'current' => InvestmentAccount::query()->where('user_id', Auth::user()->id)->first(),
+                'accounts' => InvestmentAccount::query()->where('user_id', Auth::user()->id)->get(),
                 'coins' => $coins
             ]
         );
@@ -59,6 +59,28 @@ class InvestmentController extends Controller
         ]);
 
         return redirect('/invest');
+    }
+
+    public function changeAccount(): View
+    {
+        $attributes = (object)request()->all();
+        $currentAccount = InvestmentAccount::query()
+            ->where('iban', $attributes->change_to)
+            ->first();
+
+        $accounts = InvestmentAccount::query()
+            ->where('user_id', $currentAccount->user_id)
+            ->get();
+
+        $coins = Coin::query()
+            ->where('account_id', $currentAccount->account_id)
+            ->get();
+
+        return view('auth.invest.changeAccount', [
+            'current' => $currentAccount,
+            'accounts' => $accounts,
+            'coins' => $coins
+        ]);
     }
 
     private function currencyRate(): object

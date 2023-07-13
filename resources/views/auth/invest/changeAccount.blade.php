@@ -10,8 +10,7 @@
     <main>
         <div class="mx-auto w-1/2">
             <div class="flex gap-x-4">
-                <div
-                    class="w-full border-2 bg-white border-gray-300 rounded-lg p-4 mb-4 dark:bg-gray-900 dark:text-white">
+                <div class="w-full border-2 bg-white border-gray-300 rounded-lg p-4 mb-4 dark:bg-gray-900 dark:text-white">
                     <button
                         id="ibanDropdownLink"
                         data-dropdown-toggle="ibanDropdown"
@@ -36,7 +35,7 @@
                     <!-- Dropdown list for iban numbers --->
                     <div
                         id="ibanDropdown"
-                        class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                        class="w-auto z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                     >
                         <ul
                             class="py-2 text-sm text-gray-700 dark:text-white"

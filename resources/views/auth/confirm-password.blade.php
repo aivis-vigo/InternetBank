@@ -11,7 +11,7 @@
         <form action="/user/confirm-password" method="post">
             @csrf
             <div>
-                <div class="text-black">
+                <div class="text-black dark:text-white">
                     This is a secure are of the application. Please confirm tour password before continuing.
                 </div>
                 <label

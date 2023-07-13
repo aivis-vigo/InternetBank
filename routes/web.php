@@ -9,7 +9,6 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\InvestmentAccount;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -37,6 +36,12 @@ Route::middleware('auth')->group(
         // Payment
         Route::get('/payment', [PaymentController::class, 'index']);
         Route::post('/payment/validate', [PaymentController::class, 'validateTransaction']);
+        Route::middleware('invest')->group(
+            function () {
+                Route::get('/payment-to-investment-account', [PaymentController::class, 'transferView']);
+                Route::post('/transfer-to-investment-account', [PaymentController::class, 'transferToInvestment']);
+            }
+        );
 
         // Cards
         Route::get('/cards', [CardController::class, 'index']);
@@ -52,6 +57,7 @@ Route::middleware('auth')->group(
                 Route::get('/coin/{id}', function (string $coinID) {
                     return (new CoinController())->show($coinID);
                 });
+                Route::post('/change-investment-account', [InvestmentController::class, 'changeAccount']);
             }
         );
 
