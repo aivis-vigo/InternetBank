@@ -91,65 +91,67 @@
                 </div>
             </div>
 
-            <div class="flex w-full border-2 bg-white border-gray-300 rounded-lg p-4 dark:text-white dark:bg-gray-900">
+            <div class="w-full space-y-4 border-2 bg-white border-gray-300 rounded-lg p-4 dark:text-white dark:bg-gray-900">
                 @forelse($coins as $coin)
-                    <form
-                        action="/sell/{{ $coin->symbol }}"
-                        method="post"
-                        class="flex my-2 p-4 bg-gray-200 rounded-lg dark:bg-gray-800"
-                    >
-                        @csrf
-                        <div>
-                            <div>
-                                {{ $coin->name }}
+                    <div class="flex justify-between bg-gray-200 dark:bg-gray-800 rounded-lg">
+                        <form
+                            action="/sell/{{ $coin->symbol }}"
+                            method="post"
+                            class="flex px-4 bg-gray-200 rounded-lg dark:bg-gray-800"
+                        >
+                            @csrf
+                            <div class="my-4 flex justify-between">
+                                <div>
+                                    {{ $coin->name }}
+                                </div>
+                                <div>
+                                    {{ $coin->price }}
+                                </div>
+                                <div>
+                                    {{ $coin->amount }} {{ $coin->symbol }}
+                                </div>
+
+                                <input type="hidden" name="id" value="{{ $coin->id }}">
+                                <input type="hidden" name="name" value="{{ $coin->name }}">
+                                <input type="hidden" name="price" value="{{ $coin->price }}">
+
+                                <input
+                                    class="w-1/3"
+                                    type="number"
+                                    name="amount"
+                                    max="{{ $coin->amount }}"
+                                    step="0.0001"
+                                    placeholder="0.001 {{ $coin->symbol }}"
+                                    required
+                                >
+
+                                <button
+                                    type="submit"
+                                    class="text-red-500 dark:hover:text-black">
+                                    Sell
+                                </button>
                             </div>
-                            <div>
-                                {{ $coin->price }}
-                            </div>
-                            <div>
-                                {{ $coin->amount }} {{ $coin->symbol }}
-                            </div>
+                        </form>
+
+                        <form
+                            action="/sell/{{ $coin->symbol }}"
+                            method="post"
+                            class="flex px-4 bg-gray-200 rounded-lg dark:bg-gray-800"
+                        >
+                            @csrf
 
                             <input type="hidden" name="id" value="{{ $coin->id }}">
                             <input type="hidden" name="name" value="{{ $coin->name }}">
                             <input type="hidden" name="price" value="{{ $coin->price }}">
-
-                            <input
-                                class="w-1/3"
-                                type="number"
-                                name="amount"
-                                max="{{ $coin->amount }}"
-                                step="0.0001"
-                                placeholder="0.001 {{ $coin->symbol }}"
-                                required
-                            >
+                            <input type="hidden" name="amount" value="{{ $coin->amount }}">
 
                             <button
                                 type="submit"
                                 class="text-red-500 dark:hover:text-black">
-                                Sell
+                                Sell All
                             </button>
-                        </div>
-                    </form>
-
-                    <form
-                        action="/sell/{{ $coin->symbol }}"
-                        method="post"
-                        class="flex my-2 p-4 bg-gray-200 rounded-lg dark:bg-gray-800"
-                    >
-                        @csrf
-
-                        <input type="hidden" name="id" value="{{ $coin->id }}">
-                        <input type="hidden" name="name" value="{{ $coin->name }}">
-                        <input type="hidden" name="price" value="{{ $coin->price }}">
-                        <input type="hidden" name="amount" value="{{ $coin->amount }}">
-
-                        <button
-                            type="submit"
-                            class="text-red-500 dark:hover:text-black">
-                            Sell All
-                        </button>
-                    </form>
+                        </form>
+                    </div>
                 @empty
                     Nothing to show
                 @endforelse
