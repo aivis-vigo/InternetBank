@@ -36,7 +36,7 @@
                     <!-- Dropdown list for iban numbers --->
                     <div
                         id="ibanDropdown"
-                        class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                        class="w-auto z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                     >
                         <ul
                             class="py-2 text-sm text-gray-700 dark:text-white"
@@ -91,12 +91,12 @@
                 </div>
             </div>
 
-            <div class="border-2 bg-white border-gray-300 rounded-lg p-4 dark:text-white dark:bg-gray-900">
+            <div class="flex w-full border-2 bg-white border-gray-300 rounded-lg p-4 dark:text-white dark:bg-gray-900">
                 @forelse($coins as $coin)
                     <form
                         action="/sell/{{ $coin->symbol }}"
                         method="post"
-                        class="flex my-2 p-4 bg-gray-200 hover:bg-gray-300 rounded-lg dark:bg-gray-800 dark:hover:text-black"
+                        class="flex my-2 p-4 bg-gray-200 rounded-lg dark:bg-gray-800"
                     >
                         @csrf
                         <div>
@@ -135,7 +135,7 @@
                     <form
                         action="/sell/{{ $coin->symbol }}"
                         method="post"
-                        class="flex my-2 p-4 bg-gray-200 hover:bg-gray-300 rounded-lg dark:bg-gray-800 dark:hover:text-black"
+                        class="flex my-2 p-4 bg-gray-200 rounded-lg dark:bg-gray-800"
                     >
                         @csrf
 

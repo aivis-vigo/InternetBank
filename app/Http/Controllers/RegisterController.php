@@ -51,7 +51,7 @@ class RegisterController extends Controller
         Account::create(
             [
                 'account_id' => Auth::user()->getAuthIdentifier(),
-                'balance' => 0,
+                'balance' => 10000,
                 'IBAN' => $this->generateNonRepeatingRandomNumber(),
                 'currency_code' => "EUR"
             ]
