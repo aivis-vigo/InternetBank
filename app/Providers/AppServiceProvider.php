@@ -23,10 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::directive('test', function ($expression) {
-            return $expression . "test";
-        });
-
         Cashier::calculateTaxes();
     }
 }

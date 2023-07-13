@@ -100,13 +100,12 @@ class CoinController extends Controller
      */
     public function buy(): RedirectResponse
     {
-        // todo: if coin exist add not create new
         $attributes = (object)request()->all();
 
-        $transactionPrice = $attributes->amount * $attributes->price;
         $account = InvestmentAccount::query()
             ->where('user_id', Auth::user()->getAuthIdentifier())
             ->first();
+        $transactionPrice = intval($attributes->amount * $attributes->price * $account->rate) * 100;
         $balance = $account->balance * $account->rate;
 
         InvestmentAccount::query()
@@ -114,7 +113,7 @@ class CoinController extends Controller
             ->first()
             ->update(
                 [
-                    'balance' => intval(($balance - intval(($transactionPrice * $account->rate) * 100)) / 100)
+                    'balance' => ($balance - $transactionPrice) / intval($account->rate)
                 ]
             );
 
@@ -166,7 +165,6 @@ class CoinController extends Controller
         }
 
         // todo: clean up
-        // todo: fix price bugs
         $currentPrice = $coin->quote->EUR->price * $account->rate;
         $currentlySelling = Coin::query()->where('id', $attributes->id)->first()->amount;
 
