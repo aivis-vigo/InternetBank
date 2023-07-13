@@ -73,7 +73,7 @@ class InvestmentController extends Controller
             ->get();
 
         $coins = Coin::query()
-            ->where('account_id', $currentAccount->account_id)
+            ->where('account_id', $currentAccount->user_id)
             ->get();
 
         return view('auth.invest.changeAccount', [
