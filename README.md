@@ -1,66 +1,126 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Internet Bank
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Welcome to the Internet Bank project! This project is built using the Laravel framework and provides a secure and
+convenient platform for users to manage their finances. It includes features such as user registration, login, logout,
+2FA (Two-Factor Authentication), money transfers, personal bank card management, and investment account functionality
+with cryptocurrency support.
 
-## About Laravel
+## Table of Contents
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **User Authentication:** The Internet Bank provides a secure authentication system with user registration, login, and
+   logout functionality.
+2. **Security:** Fortify, a Laravel package, is integrated to enhance security. Users have the option to enable or
+   disable Two-Factor Authentication (2FA) to further protect their accounts.
+3. **Money Transfers:** Users can easily transfer money from their account to different accounts within the Internet
+   Bank.
+4. **Personal Bank Card Management:** Users can add and manage their personal bank cards within the Internet Bank.
+5. **Investment Accounts:** Users with investment accounts can transfer funds from their regular account to their
+   investment account. They can also buy and sell cryptocurrencies.
+6. **Currency Selection:** Users with investment accounts can select the currency in which they want their account to be
+   denominated.
 
-## Learning Laravel
+## Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+To run the Internet Bank project, you need to have the following installed on your system:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- PHP (version 7.4 or higher)
+- Composer
+- MySQL or another compatible database
+- Web server (such as Apache or Nginx)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+1. Clone the project repository:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+   ```bash
+   git clone https://github.com/your-username/internet-bank.git
 
-### Premium Partners
+2. Install the dependencies using Composer:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+   ```bash
+   cd internet-bank
+   composer install
+
+3. Configure your environment variables by renaming the .env.example file to .env:
+
+   ```bash
+   cp .env.example .env
+
+4. Generate a unique application key:
+
+   ```bash
+   php artisan key:generate
+
+5. Configure your database connection settings in the .env file:
+
+   ```bash
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+
+6. Migrate the database:
+
+   ```bash
+   php artisan migrate
+
+7. Start the local development server:
+
+   ```bash
+   php artisan serve
+
+7. You can now access the Internet Bank application in your browser at
+
+   ```bash
+   http://localhost:8000
+
+## Configuration
+
+The Internet Bank project can be customized by modifying the corresponding configuration files in the `config` directory. Some important files to note are:
+
+- `config/fortify.php`: Contains the configuration for Fortify's security features, such as enabling or disabling 2FA.
+- `config/currencies.php`: Defines the available currency options for investment accounts.
+
+Please refer to the Laravel documentation for more information on how to configure these files.
+
+## Usage
+
+Once the Internet Bank application is set up, users can perform various actions:
+
+- Visit the registration page to create an account.
+- Log in using their credentials.
+- Enable or disable 2FA in the account settings.
+- Manage personal bank cards in the corresponding section.
+- Perform money transfers to different accounts within the Internet Bank.
+- For users with investment accounts, transfer funds to their investment account and buy or sell cryptocurrencies.
+- Select the preferred currency for their investment account.
+
+Please refer to the documentation or comments within the code for more detailed instructions on how to use specific features.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Contributions to the Internet Bank project are welcome! If you would like to contribute, please follow these steps:
 
-## Code of Conduct
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Submit a pull request to the main repository.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Please ensure your code adheres to the project's coding standards and includes appropriate tests and documentation.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Internet Bank project is open-source software licensed under the MIT License. Feel free to use, modify, and distribute it as per the terms of the license.
