@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\InvestmentAccount;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -151,10 +152,9 @@ class PaymentController extends Controller
         }
     }
 
-    public
-    function transferView(): View
+    public function transferView(): View
     {
-        $accounts = \App\Models\InvestmentAccount::query()
+        $accounts = InvestmentAccount::query()
             ->where('user_id', Auth::user()->getAuthIdentifier())
             ->get();
 
@@ -168,10 +168,8 @@ class PaymentController extends Controller
         ]);
     }
 
-    public
-    function transferToInvestment(): RedirectResponse
+    public function validateForInvestment(): RedirectResponse
     {
-        // todo: status message
         $attributes = (object)request()->validate([
             'iban' => ['required', 'min:21', 'max:21'],
             'amount' => ['required', 'min:0']
@@ -181,9 +179,35 @@ class PaymentController extends Controller
             return back()->with('error', 'Amount should be positive!');
         }
 
+        return redirect('/confirm-transfer-to-investment')->with('transferInfo', $attributes);
+    }
+
+    public function getInvestmentQrCode(): View
+    {
+        $transfer = (object)session('transferInfo');
+        $google2fa =  app('pragmarx.google2fa');
+
+        $codeUrl = $google2fa->getQRCodeInline(
+            'Test',
+            'test@example.com',
+            Auth::user()->google2fa_secret
+        );
+
+        return view('auth.invest.transfer-two-factor-investment', [
+            'qrUrl' => $codeUrl,
+            'securityCode' => Auth::user()->google2fa_secret,
+            'checks' => request()->all(),
+            'transfer' => $transfer
+        ]);
+    }
+
+    public function transferToInvestment(): RedirectResponse
+    {
+        $attributes = (object)request()->all();
+
         $transferAmount = $attributes->amount * 100;
 
-        \App\Models\InvestmentAccount::query()
+        InvestmentAccount::query()
             ->where('user_id', Auth::user()->getAuthIdentifier())
             ->where('iban', $attributes->iban)
             ->increment('balance', $transferAmount);

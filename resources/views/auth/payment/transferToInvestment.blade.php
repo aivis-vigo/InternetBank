@@ -16,7 +16,7 @@
 
         <form
             class="flex flex-wrap gap-3 w-1/2  mx-auto p-5"
-            action="/transfer-to-investment-account"
+            action="/validate-transfer-to-investment"
             method="post"
         >
             @csrf

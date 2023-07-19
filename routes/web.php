@@ -36,14 +36,16 @@ Route::middleware('auth')->group(
         // Payment
         Route::get('/payment', [PaymentController::class, 'index']);
         Route::post('/payment/validate', [PaymentController::class, 'validateTransaction']);
+        Route::get('/confirm-payment', [PaymentController::class, 'getQrCode']);
+        Route::post('/redirect', [PaymentController::class, 'finishTransfer']);
         Route::middleware('invest')->group(
             function () {
                 Route::get('/payment-to-investment-account', [PaymentController::class, 'transferView']);
-                Route::post('/transfer-to-investment-account', [PaymentController::class, 'transferToInvestment']);
+                Route::post('/validate-transfer-to-investment', [PaymentController::class, 'validateForInvestment']);
+                Route::get('/confirm-transfer-to-investment', [PaymentController::class, 'getInvestmentQrCode']);
+                Route::post('/redirect-investment', [PaymentController::class, 'transferToInvestment']);
             }
         );
-        Route::get('/confirm-payment', [PaymentController::class, 'getQrCode']);
-        Route::post('/redirect', [PaymentController::class, 'finishTransfer']);
 
         // Cards
         Route::get('/add-card', [CardController::class, 'add']);
