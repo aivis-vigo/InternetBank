@@ -104,8 +104,6 @@ class PaymentController extends Controller
         } else {
             $amount = (int)($transactionRequest->amount * 100);
 
-            // todo: convert with current exchange rate if different currencies
-
             DB::update(
                 'update bankAccounts set balance = balance - ? where IBAN = ?', [
                     $amount,
