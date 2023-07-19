@@ -6,8 +6,10 @@ use App\Models\Account;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use PragmaRX\Google2FA\Google2FA;
 use function redirect;
 use function request;
 
@@ -35,7 +37,7 @@ class RegisterController extends Controller
      */
     public function store(): RedirectResponse
     {
-        $attributes = request()->validate(
+        $attributes = (object)request()->validate(
             [
                 'name' => ['required', 'min:3', 'max:255'],
                 'email' => ['required', 'max:255', Rule::unique('users', 'email')],
@@ -44,10 +46,24 @@ class RegisterController extends Controller
             ]
         );
 
-        $user = User::create($attributes);
+        $google2fa = app('pragmarx.google2fa');
+
+        $user = User::create([
+            'name' => $attributes->name,
+            'email' => $attributes->email,
+            'password' => Hash::make($attributes->password),
+            'google2fa_secret' => $google2fa->generateSecretKey()
+        ]);
 
         Auth::login($user);
 
+        $this->createBankAccount();
+
+        return redirect('/dashboard')->with('success', 'Successfully created');
+    }
+
+    private function createBankAccount(): void
+    {
         Account::create(
             [
                 'account_id' => Auth::user()->getAuthIdentifier(),
@@ -56,8 +72,6 @@ class RegisterController extends Controller
                 'currency_code' => "EUR"
             ]
         );
-
-        return redirect('/dashboard')->with('success', 'Successfully created');
     }
 
     /**

@@ -26,7 +26,7 @@
                     href="/"
                     class="flex items-center">
                     <img
-                        src="logo.png"
+                        src="../logo.png"
                         class="h-8 mr-3 rounded-lg"
                         alt="I-Bank Logo"
                     />

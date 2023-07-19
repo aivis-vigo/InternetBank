@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\InvestmentAccount;
 use App\Models\Account;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -19,11 +18,10 @@ class PaymentController extends Controller
 {
     public function index(): View
     {
-        // todo: optimize iban line
         return view('auth.payment.payment', [
             'name' => Auth::user()->name,
             'iban' => Account::query()
-                ->where('account_id', Auth::user()->id)
+                ->where('account_id', Auth::user()->getAuthIdentifier())
                 ->first('iban')
                 ->iban
         ]);
@@ -31,7 +29,7 @@ class PaymentController extends Controller
 
     public function validateTransaction(): RedirectResponse
     {
-        request()->validate(
+        $attributes = request()->validate(
             [
                 'name' => ['string', 'min:3', 'max:50', 'required'],
                 'amount' => ['string', 'min:1', 'required'],
@@ -41,7 +39,57 @@ class PaymentController extends Controller
             ]
         );
 
-        $transactionRequest = (object)request()->all();
+        return redirect('/confirm-payment')->with('transferInfo', $attributes);
+    }
+
+    public function getQrCode(): View
+    {
+        $transfer = (object)session('transferInfo');
+        $google2fa =  app('pragmarx.google2fa');
+
+        $codeUrl = $google2fa->getQRCodeInline(
+            'Test',
+            'test@example.com',
+            Auth::user()->google2fa_secret
+        );
+
+        return view('auth.payment.payment-two-factor', [
+            'qrUrl' => $codeUrl,
+            'securityCode' => Auth::user()->google2fa_secret,
+            'checks' => request()->all(),
+            'transfer' => $transfer
+        ]);
+    }
+
+    public function finishTransfer(): RedirectResponse
+    {
+        $attributes = request()->validate([
+            'name' => ['required'],
+            'amount' => ['required'],
+            'iban_number' => ['required'],
+            'receiver_name' => ['required'],
+            'receiver_iban_number' => ['required'],
+            'one_time_password' => ['required']
+        ]);
+
+        $google2fa =  app('pragmarx.google2fa');
+
+        $secretKey = Auth::user()->google2fa_secret;
+
+        $validate = $google2fa->verifyKey($secretKey, $attributes['one_time_password']);
+
+        if (!$validate) {
+            return redirect()->back()->with('transferInfo', $attributes);
+        }
+
+        $this->pay($attributes);
+
+        return redirect('/dashboard');
+    }
+
+    public function pay(array $data): void
+    {
+        $transactionRequest = (object)$data;
 
         // Selects customers for transaction
         $customer = DB::table('bankAccounts')->select('*')->whereIn(
@@ -101,11 +149,10 @@ class PaymentController extends Controller
             // todo: display animated status message
             $message = 'Transaction successful!';
         }
-
-        return redirect('/dashboard');
     }
 
-    public function transferView(): View
+    public
+    function transferView(): View
     {
         $accounts = \App\Models\InvestmentAccount::query()
             ->where('user_id', Auth::user()->getAuthIdentifier())
@@ -121,10 +168,10 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function transferToInvestment(): RedirectResponse
+    public
+    function transferToInvestment(): RedirectResponse
     {
         // todo: status message
-        // todo: code before sending
         $attributes = (object)request()->validate([
             'iban' => ['required', 'min:21', 'max:21'],
             'amount' => ['required', 'min:0']

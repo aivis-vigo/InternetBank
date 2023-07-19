@@ -159,6 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
+        PragmaRX\Google2FALaravel\ServiceProvider::class,
 
         /*
          * Application Service Providers...

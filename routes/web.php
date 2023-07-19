@@ -42,8 +42,11 @@ Route::middleware('auth')->group(
                 Route::post('/transfer-to-investment-account', [PaymentController::class, 'transferToInvestment']);
             }
         );
+        Route::get('/confirm-payment', [PaymentController::class, 'getQrCode']);
+        Route::post('/redirect', [PaymentController::class, 'finishTransfer']);
 
         // Cards
+        Route::get('/add-card', [CardController::class, 'add']);
         Route::get('/cards', [CardController::class, 'index']);
         Route::post('/add-card', [CardController::class, 'save']);
 
@@ -72,7 +75,6 @@ Route::middleware('auth')->group(
 
         // Settings
         Route::get('/settings', [UserController::class, 'show']);
-        Route::get('/add-card', [CardController::class, 'add']);
 
         // Profile
         Route::get('/profile/edit', [UserController::class, 'editUserInfo']);
